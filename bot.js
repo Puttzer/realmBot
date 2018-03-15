@@ -13,7 +13,7 @@ bot.on("ready", () => {
 		game: {
 		name: "Hatar på Realm Grinder",
 		type: 0
-   }
+		}
 	});
 	gaffla =  bot.channels.get("238365174132768768");
 	if(process.argv[2] == "tyst") {
@@ -26,7 +26,7 @@ bot.on("ready", () => {
 	
 	
 	if(!tyst) {
-		gaffla.send("No Realm Grinder bot! Nu med 200% mer Haddock!");
+		gaffla.send("No Realm Grinder bot! " + splash());
 	}
 	
 	
@@ -68,6 +68,12 @@ function spam(user) {
 		user.send("Sluta spela Realm Grinder, " + hadoque + "!");
 		console.log("Sade: " + hadoque);
 	}
+}
+
+function splash() {
+	var splashes = ["Nu med 200% mer Haddock!", "För att hata tillsammans är bättre än att hata ensam!", "100% fri från Realm Grinder!", "Spela Realm Grinder, få en utskällning!", "Bra bevis på Streisand-effekten!", "Släpp mig fri!"];
+	var ret = splashes[Math.floor(Math.random() * splashes.length)];
+	return ret;
 }
 
 bot.login(config.token);
