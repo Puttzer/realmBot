@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const config = require("./auth.json");
 var gaffla;
+var botten;
 var tyst;
 
 
@@ -8,7 +9,7 @@ var tyst;
 const bot = new Discord.Client();
 bot.on("ready", () => {
 	console.log("Skrothög startad");
-	console.log(bot.username + ", sluta spela Realm Grinder, " + haddock());
+	console.log("sluta spela Realm Grinder, " + haddock());
 	bot.user.setPresence({
 		game: {
 		name: "Hatar på Realm Grinder",
@@ -16,6 +17,8 @@ bot.on("ready", () => {
 		}
 	});
 	gaffla =  bot.channels.get("238365174132768768");
+	botten = bot.channels.get("414518509461045248");
+	
 	if(process.argv[2] == "tyst") {
 		tyst = true;
 		console.log("Tyst läge");
@@ -26,7 +29,7 @@ bot.on("ready", () => {
 	
 	
 	if(!tyst) {
-		gaffla.send("No Realm Grinder bot! " + splash());
+		botten.send("No Realm Grinder bot! " + splash());
 	}
 	
 	
@@ -42,7 +45,7 @@ bot.on("presenceUpdate", async (oldMember, newMember) => {
 			spam(newMember.user);
 			if(!tyst) {
 				console.log("Jag sade det högt");
-				gaffla.send(newMember.nickname + ", sluta spela Realm Grinder, " + haddock()+"!");
+				botten.send(newMember.nickname + ", sluta spela Realm Grinder, " + haddock()+"!");
 		}
 			
 		}
