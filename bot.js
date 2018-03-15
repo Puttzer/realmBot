@@ -8,7 +8,7 @@ var tyst;
 const bot = new Discord.Client();
 bot.on("ready", () => {
 	console.log("Skrothög startad");
-	console.log("Sluta spela Realm Grinder, " + haddock() + "!");
+	console.log(bot.username + ", sluta spela Realm Grinder, " + haddock());
 	bot.user.setPresence({
 		game: {
 		name: "Hatar på Realm Grinder",
@@ -24,8 +24,9 @@ bot.on("ready", () => {
 		console.log("Högljutt läge");
 	}
 	
+	
 	if(!tyst) {
-		gaffla.send("No Realm Grinder bot! Nu med Haddock-mode!");
+		gaffla.send("No Realm Grinder bot! Nu med 200% mer Haddock!");
 	}
 	
 	
@@ -41,7 +42,7 @@ bot.on("presenceUpdate", async (oldMember, newMember) => {
 			spam(newMember.user);
 			if(!tyst) {
 				console.log("Jag sade det högt");
-				gaffla.send(newMember.nickname + " spelar lite Realm Grinder, sprid lite hat till den personen!");
+				gaffla.send(newMember.nickname + ", sluta spela Realm Grinder, " + haddock()+"!");
 		}
 			
 		}
@@ -61,9 +62,12 @@ function haddock() {
 }
 
 function spam(user) {
-			for(i = 0; i < 5; i++) {
-				user.send("Sluta spela Realm Grinder, " + haddock() + "!");
-			}
+	console.log("Haddock pratar med " + user.username);		
+	for(i = 0; i < 5; i++) {
+		var hadoque = haddock();
+		user.send("Sluta spela Realm Grinder, " + hadoque + "!");
+		console.log("Sade: " + hadoque);
+	}
 }
 
 bot.login(config.token);
