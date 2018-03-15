@@ -48,6 +48,12 @@ bot.on("presenceUpdate", async (oldMember, newMember) => {
 
 });
 
+function haddock() {
+	//http://www.nissepedia.com/index.php/Kapten_Haddocks_samlade_svordomar
+	var fraser = {"murmeldjur","enögda murmeldjur", "sjögurka", "apsvansade analfabet", "amöba"};
+	return "";
+}
+
 function spam(user) {
 			for(i = 0; i < 5; i++) {
 				user.send("Sluta spela Realm Grinder!");
