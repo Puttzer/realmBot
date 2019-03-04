@@ -12,26 +12,18 @@ bot.on("ready", () => {
 	console.log("sluta spela Realm Grinder, " + haddock());
 	bot.user.setPresence({
 		game: {
-		name: "Hatar på Realm Grinder",
+		name: "med den största lemmen",
 		type: 0
 		}
 	});
 	gaffla =  bot.channels.get("238365174132768768");
-	botten = bot.channels.get("414518509461045248");
+	//gaffla.send("Tack, jag är ärad över att ha fått denna titel. Min digitala lem är endast begränsad av storleken på min hårddisk, vilket inte är en floppy. Försök klå två terrabyte av lem!");
 	
-	if(process.argv[2] == "tyst") {
-		tyst = true;
-		console.log("Tyst läge");
-	} else {
-		tyst = false;
-		console.log("Högljutt läge");
-	}
+	var list = bot.guilds.get('238365174132768768').members;
+	console.log(list);
 	
 	
-	if(!tyst) {
-		botten.send("No Realm Grinder bot! " + splash());
-	}
-	
+
 	
 	
 	
