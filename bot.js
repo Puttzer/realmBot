@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
 const config = require("./auth.json");
+const fs = require('fs');
+const ytdl = require('ytdl-core');
 var gaffla;
 var botten;
 var tyst;
@@ -7,44 +9,102 @@ var tyst;
 
 // Initialize Discord Bot
 const bot = new Discord.Client();
+playing = false;
 bot.on("ready", () => {
 	console.log("Skrothög startad");
-	console.log("sluta spela Realm Grinder, " + haddock());
 	bot.user.setPresence({
 		game: {
-		name: "med den största lemmen",
+		name: "The price is right!",
 		type: 0
 		}
 	});
+	main_text = bot.channels.get("613738877139681300");
 	gaffla =  bot.channels.get("238365174132768768");
-	//gaffla.send("Tack, jag är ärad över att ha fått denna titel. Min digitala lem är endast begränsad av storleken på min hårddisk, vilket inte är en floppy. Försök klå två terrabyte av lem!");
+	kanal = bot.channels.get("541219041776500747");
+	vanlig = bot.channels.get("238365174132768769");
 	
-	var list = bot.guilds.get('238365174132768768').members;
-	console.log(list);
-	
-	
+	bot.on('message', msg => {
+		if (msg.content === '!cum' && !playing) {
+			cum(msg);
+		  }
+		});
 
-	
-	
-	
-});
 
-bot.on("presenceUpdate", async (oldMember, newMember) => { 
+	});
+
+function cum(msg) {
+	channel = msg.member.voiceChannel;
+	channel.join().then(connection => {
+	stream = ytdl("https://www.youtube.com/watch?v=G8iOmVd1W_g");
+	const dispatcher = connection.playStream(stream);
+	dispatcher.on('start', () => {
+		console.log("Started!")
+		playing = true;
+	});
+	dispatcher.on('end', () => {
+		console.log("ended...")
+		playing = false;
+		channel.leave();
+	});
+
+	dispatcher.on('error', e => {
+		// Catch any errors that may arise
+		playing = false;
+		console.log(e);
+	});
+	
+})
+}
+	
+	
+/*
+function save() {
+		const dispatcher = connection.playArbitraryInput(song);
+		dispatcher.on('start', () => {
+			console.log("Started!")
+		});
+		dispatcher.on('end', () => {
+			console.log("ended...")
+		});
+		dispatcher.setVolume(1);
+
+		dispatcher.on('error', e => {
+			// Catch any errors that may arise
+			console.log(e);
+	}
+
+
+*/
+
+
+	//var list = bot.guilds.get('238365174132768768').members;
+
+	//console.log(list);
+
+
+
+
+
+
+
+
+bot.on("presenceUpdate", async (oldMember, newMember) => {
 	if (newMember.presence.game !== null) {
 		console.log(newMember.nickname + ": " + newMember.presence.game.name);
 		if( newMember.presence.game.name == "Realm Grinder") {
 			console.log(newMember.nickname + " kör Realm Grinder");
 			spam(newMember.user);
+			gaffla.send("Stop playing realmgrinder, " + newMember.nickname, {tts:true});
 			if(!tyst) {
 				console.log("Jag sade det högt");
 				botten.send(newMember.nickname + ", sluta spela Realm Grinder, " + haddock()+"!");
 		}
-			
+
 		}
 
 	}
 
-	
+
 
 });
 
@@ -55,9 +115,15 @@ function haddock() {
 	return rand;
 
 }
+function songs() {
+	var song = ["https://www.youtube.com/watch?v=4T0aFnzYKmU", "https://www.youtube.com/watch?v=WkRc65qcdLI", "https://www.youtube.com/watch?v=ZxqYInBDwss", "https://www.youtube.com/watch?v=rUyKiCC8xB4", "https://www.youtube.com/watch?v=D2b6P-kg6_c"];
+	var rand = song[Math.floor(Math.random() * song.length)];
+	//return rand;
+	return "https://www.youtube.com/watch?v=zK_Cau7UUAo";
+}
 
 function spam(user) {
-	console.log("Haddock pratar med " + user.username);		
+	console.log("Haddock pratar med " + user.username);
 	for(i = 0; i < 5; i++) {
 		var hadoque = haddock();
 		user.send("Sluta spela Realm Grinder, " + hadoque + "!");
