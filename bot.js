@@ -10,6 +10,8 @@ var tyst;
 // Initialize Discord Bot
 const bot = new Discord.Client();
 playing = false;
+playingChannel = null;
+player = null
 bot.on("ready", () => {
 	console.log("Skrothög startad");
 	bot.user.setPresence({
@@ -27,6 +29,17 @@ bot.on("ready", () => {
 		if (msg.content === '!cum' && !playing) {
 			cum(msg);
 		  }
+		else if(msg.content === '!cum' && playing){
+			 msg.reply("I can only !cum so much!");
+		}
+		else if(msg.content === "!nutted" && playing) {
+			playingChannel.leave();
+			playing = false;
+			
+		}
+		else if(msg.content === "!nutted" && !playing) {
+			msg.reply("Can't cum if I haven't started");
+		}
 		});
 
 
@@ -34,22 +47,34 @@ bot.on("ready", () => {
 
 function cum(msg) {
 	channel = msg.member.voiceChannel;
+	if(channel === undefined) {
+		msg.reply("You are not in a channel, " + haddock());
+		return;
+	}
 	channel.join().then(connection => {
 	stream = ytdl("https://www.youtube.com/watch?v=G8iOmVd1W_g");
 	const dispatcher = connection.playStream(stream);
+	
 	dispatcher.on('start', () => {
 		console.log("Started!")
+		playingChannel = channel
+		player = dispatcher;
 		playing = true;
 	});
 	dispatcher.on('end', () => {
 		console.log("ended...")
 		playing = false;
+		playingChannel = null;
+		player = null;
 		channel.leave();
 	});
 
 	dispatcher.on('error', e => {
 		// Catch any errors that may arise
 		playing = false;
+		playingChannel = null;
+		player = null;
+		channel.leave();
 		console.log(e);
 	});
 	
