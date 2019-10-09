@@ -5,6 +5,8 @@ const ytdl = require('ytdl-core');
 var gaffla;
 var botten;
 var tyst;
+const price = "https://www.youtube.com/watch?v=G8iOmVd1W_g";
+const spook = "https://www.youtube.com/watch?v=eVrYbKBrI7o";
 
 
 // Initialize Discord Bot
@@ -24,10 +26,10 @@ bot.on("ready", () => {
 	gaffla =  bot.channels.get("238365174132768768");
 	kanal = bot.channels.get("541219041776500747");
 	vanlig = bot.channels.get("238365174132768769");
-	
+
 	bot.on('message', msg => {
 		if (msg.content === '!cum' && !playing) {
-			cum(msg);
+			cum(msg, price);
 		  }
 		else if(msg.content === '!cum' && playing){
 			 msg.reply("I can only !cum so much!");
@@ -35,26 +37,29 @@ bot.on("ready", () => {
 		else if(msg.content === "!nutted" && playing) {
 			playingChannel.leave();
 			playing = false;
-			
+
 		}
 		else if(msg.content === "!nutted" && !playing) {
 			msg.reply("Can't cum if I haven't started");
+		}
+		else if(msg.content === "!spook" && !playing) {
+			cum(msg, spook);
 		}
 		});
 
 
 	});
 
-function cum(msg) {
+function cum(msg, video) {
 	channel = msg.member.voiceChannel;
 	if(channel === undefined) {
 		msg.reply("You are not in a channel, " + haddock());
 		return;
 	}
 	channel.join().then(connection => {
-	stream = ytdl("https://www.youtube.com/watch?v=G8iOmVd1W_g");
+	stream = ytdl(video);
 	const dispatcher = connection.playStream(stream);
-	
+
 	dispatcher.on('start', () => {
 		console.log("Started!")
 		playingChannel = channel
@@ -77,11 +82,11 @@ function cum(msg) {
 		channel.leave();
 		console.log(e);
 	});
-	
+
 })
 }
-	
-	
+
+
 /*
 function save() {
 		const dispatcher = connection.playArbitraryInput(song);
