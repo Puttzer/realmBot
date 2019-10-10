@@ -9,6 +9,8 @@ const price = "https://www.youtube.com/watch?v=G8iOmVd1W_g";
 const spook = "https://www.youtube.com/watch?v=eVrYbKBrI7o";
 const cheeki = "https://www.youtube.com/watch?v=JsWwMTuG4NA";
 const owo = "";
+const nuzzle = "https://www.youtube.com/watch?v=h6DNdop6pD8";
+const cummies = "https://www.youtube.com/watch?v=CxVDnpsGTZY";
 
 // Initialize Discord Bot
 const bot = new Discord.Client();
@@ -62,8 +64,22 @@ bot.on("ready", () => {
 		else if(msg.content === "!owo") {
 			msg.channel.send("*Notices bulge* OwO What's this?", {tts:true})
 		}
-		else if(msg.content === "!test") {
-			//msg.channel.send("Testing", {tts:true});
+		else if(msg.content === "!nuzzle") {
+			if(playing) {
+				msg.reply("Pwease don't pweassuwe me  （งΦ Д Φ）ง");
+			} else {
+				cum(msg, nuzzle);
+			}
+		}
+		else if (msg.content === "!cummies") {
+			if(playing) {
+				msg.reply("The cummies are not done yet, daddy XD");
+			} else {
+				cum(msg, cummies);
+			}
+		}
+		else if (msg.content === "!kittn") {
+			msg.channel.send("Kitten kunde inte bestämma sig (ﾐΦ ﻌ Φﾐ)∫");
 		}
 		});
 	});
