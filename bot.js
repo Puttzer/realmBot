@@ -7,7 +7,8 @@ var botten;
 var tyst;
 const price = "https://www.youtube.com/watch?v=G8iOmVd1W_g";
 const spook = "https://www.youtube.com/watch?v=eVrYbKBrI7o";
-
+const cheeki = "https://www.youtube.com/watch?v=JsWwMTuG4NA";
+const owo = "";
 
 // Initialize Discord Bot
 const bot = new Discord.Client();
@@ -28,26 +29,43 @@ bot.on("ready", () => {
 	vanlig = bot.channels.get("238365174132768769");
 
 	bot.on('message', msg => {
-		if (msg.content === '!cum' && !playing) {
-			cum(msg, price);
-		  }
-		else if(msg.content === '!cum' && playing){
-			 msg.reply("I can only !cum so much!");
-		}
-		else if(msg.content === "!nutted" && playing) {
-			playingChannel.leave();
-			playing = false;
+		if (msg.content === '!cum') {
+			if(playing) {
+				msg.reply("I can only !cum so much!");
+			} else {
+				cum(msg, price);
+			}
 
 		}
-		else if(msg.content === "!nutted" && !playing) {
-			msg.reply("Can't cum if I haven't started");
+		else if(msg.content === "!nutted") {
+			if(playing) {
+				playingChannel.leave();
+				playing = false;
+			} else {
+				msg.reply("Can't cum if I haven't started");
+			}
 		}
-		else if(msg.content === "!spook" && !playing) {
-			cum(msg, spook);
+		else if(msg.content === "!spook") {
+			if(playing) {
+				msg.reply("I can't multi task, " + haddock());
+			} else {
+				cum(msg, spook);
+			}
+		}
+		else if(msg.content === "!blyat") {
+			if(playing) {
+				msg.reply("Я могу сделать только одну вещь одновременно, сука");
+			} else {
+				cum(msg, cheeki);
+			}
+		}
+		else if(msg.content === "!owo") {
+			msg.channel.send("*Notices bulge* OwO What's this?", {tts:true})
+		}
+		else if(msg.content === "!test") {
+			//msg.channel.send("Testing", {tts:true});
 		}
 		});
-
-
 	});
 
 function cum(msg, video) {
@@ -120,7 +138,7 @@ function save() {
 
 bot.on("presenceUpdate", async (oldMember, newMember) => {
 	if (newMember.presence.game !== null) {
-		console.log(newMember.nickname + ": " + newMember.presence.game.name);
+		//console.log(newMember.nickname + ": " + newMember.presence.game.name);
 		if( newMember.presence.game.name == "Realm Grinder") {
 			console.log(newMember.nickname + " kör Realm Grinder");
 			spam(newMember.user);
