@@ -41,6 +41,7 @@ bot.on("ready", () => {
 		}
 		else if(msg.content === "!nutted") {
 			if(playing) {
+				msg.channel.send({files: ['nutted.png']})
 				playingChannel.leave();
 				playing = false;
 			} else {
