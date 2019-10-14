@@ -11,6 +11,7 @@ const cheeki = "https://www.youtube.com/watch?v=JsWwMTuG4NA";
 const owo = "";
 const nuzzle = "https://www.youtube.com/watch?v=h6DNdop6pD8";
 const cummies = "https://www.youtube.com/watch?v=CxVDnpsGTZY";
+const huggies = "https://www.youtube.com/watch?v=I17QjIC6QJw&feature=youtu.be";
 
 // Initialize Discord Bot
 const bot = new Discord.Client();
@@ -35,6 +36,7 @@ bot.on("ready", () => {
 			if(playing) {
 				msg.reply("I can only !cum so much!");
 			} else {
+				playing = true;
 				cum(msg, price);
 			}
 
@@ -45,6 +47,7 @@ bot.on("ready", () => {
 				playingChannel.leave();
 				playing = false;
 			} else {
+				playing = true;
 				msg.reply("Can't cum if I haven't started");
 			}
 		}
@@ -52,6 +55,7 @@ bot.on("ready", () => {
 			if(playing) {
 				msg.reply("I can't multi task, " + haddock());
 			} else {
+				playing = true;
 				cum(msg, spook);
 			}
 		}
@@ -59,6 +63,7 @@ bot.on("ready", () => {
 			if(playing) {
 				msg.reply("Я могу сделать только одну вещь одновременно, сука");
 			} else {
+				playing = true;
 				cum(msg, cheeki);
 			}
 		}
@@ -69,6 +74,7 @@ bot.on("ready", () => {
 			if(playing) {
 				msg.reply("Pwease don't pweassuwe me  （งΦ Д Φ）ง");
 			} else {
+				playing = true;
 				cum(msg, nuzzle);
 			}
 		}
@@ -76,6 +82,7 @@ bot.on("ready", () => {
 			if(playing) {
 				msg.reply("The cummies are not done yet, daddy XD");
 			} else {
+				playing = true;
 				cum(msg, cummies);
 			}
 		}
@@ -99,7 +106,6 @@ function cum(msg, video) {
 		console.log("Started!")
 		playingChannel = channel
 		player = dispatcher;
-		playing = true;
 	});
 	dispatcher.on('end', () => {
 		console.log("ended...")
