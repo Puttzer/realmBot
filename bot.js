@@ -12,6 +12,7 @@ const owo = "";
 const nuzzle = "https://www.youtube.com/watch?v=h6DNdop6pD8";
 const cummies = "https://www.youtube.com/watch?v=CxVDnpsGTZY";
 const huggies = "https://www.youtube.com/watch?v=I17QjIC6QJw&feature=youtu.be";
+const portal = "https://www.youtube.com/watch?v=mD3v1B_aXw0";
 
 // Initialize Discord Bot
 const bot = new Discord.Client();
@@ -40,6 +41,14 @@ bot.on("ready", () => {
 				cum(msg, price);
 			}
 
+		}
+		else if(msg.content === "!huggies") {
+			if(playing) {
+				msg.reply("Not done pouncing somebody else, UWU <3");
+			} else {
+				playing = true;
+				cum(msg, huggies);
+			}
 		}
 		else if(msg.content === "!nutted") {
 			if(playing) {
@@ -84,6 +93,14 @@ bot.on("ready", () => {
 			} else {
 				playing = true;
 				cum(msg, cummies);
+			}
+		}
+		else if (msg.content === "!radio") {
+			if(playing) {
+				msg.reply("Testing has to finish before you can come. Science has now validated your birth mother's decision to abandon you on a doorstep.");
+			} else {
+				playing = true;
+				cum(msg, portal);
 			}
 		}
 		else if (msg.content === "!kittn") {
