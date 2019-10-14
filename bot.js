@@ -87,7 +87,7 @@ bot.on("ready", () => {
 			}
 		}
 		else if (msg.content === "!kittn") {
-			msg.channel.send("Kitten kunde inte bestämma sig (ﾐΦ ﻌ Φﾐ)∫");
+			msg.channel.send("Benjicanine: @Razorkittn I don't think you know the definition of yiff");
 		}
 		});
 	});
