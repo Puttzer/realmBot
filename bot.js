@@ -19,10 +19,11 @@ const seinfeld = "https://www.youtube.com/watch?v=_V2sBURgUBI";
 const seindfeldRape = "https://www.youtube.com/watch?v=bea9aFBGuwQ&feature=youtu.be";
 const enthusiasm = "https://www.youtube.com/watch?v=Ag1o3koTLWM&feature=youtu.be";
 const fuck = "https://www.youtube.com/watch?v=Vqbk9cDX0l0&feature=youtu.be";
+const cummotion = "https://www.youtube.com/watch?v=j0lN0w5HVT8&feature=youtu.be";
 
 
 
-const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded"];
+const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion"];
 
 // Initialize Discord Bot
 const bot = new Discord.Client();
@@ -165,6 +166,13 @@ bot.on("ready", () => {
 				message = message + list[i] + "\n";
 			}
 			msg.channel.send(message)
+		}
+		else if (msg.content === "!cummotion") {
+			if (playing) {
+				msg.reply("Bees make Honey, I can't currently make Cummy")
+			} else {
+				cum(msg, cummotion);
+			}
 		}
 		});
 	});
