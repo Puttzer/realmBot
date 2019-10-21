@@ -171,6 +171,7 @@ bot.on("ready", () => {
 			if (playing) {
 				msg.reply("Bees make Honey, I can't currently make Cummy")
 			} else {
+				playing = true;
 				cum(msg, cummotion);
 			}
 		}
