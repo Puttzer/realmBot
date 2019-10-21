@@ -13,6 +13,16 @@ const nuzzle = "https://www.youtube.com/watch?v=h6DNdop6pD8";
 const cummies = "https://www.youtube.com/watch?v=CxVDnpsGTZY";
 const huggies = "https://www.youtube.com/watch?v=I17QjIC6QJw&feature=youtu.be";
 const portal = "https://www.youtube.com/watch?v=mD3v1B_aXw0";
+const longPortal = "https://www.youtube.com/watch?v=s-UFPhz2nZ0&t";
+const boiborton = "https://www.youtube.com/watch?v=zTvbHUeaphw";
+const seinfeld = "https://www.youtube.com/watch?v=_V2sBURgUBI";
+const seindfeldRape = "https://www.youtube.com/watch?v=bea9aFBGuwQ&feature=youtu.be";
+const enthusiasm = "https://www.youtube.com/watch?v=Ag1o3koTLWM&feature=youtu.be";
+const fuck = "https://www.youtube.com/watch?v=Vqbk9cDX0l0&feature=youtu.be";
+
+
+
+const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded"];
 
 // Initialize Discord Bot
 const bot = new Discord.Client();
@@ -57,12 +67,12 @@ bot.on("ready", () => {
 				playing = false;
 			} else {
 				playing = true;
-				msg.reply("Can't cum if I haven't started");
+				msg.reply("Can't nut if I haven't started");
 			}
 		}
 		else if(msg.content === "!spook") {
 			if(playing) {
-				msg.reply("I can't multi task, " + haddock());
+				msg.reply("I don't want to spook you too much!");
 			} else {
 				playing = true;
 				cum(msg, spook);
@@ -95,20 +105,78 @@ bot.on("ready", () => {
 				cum(msg, cummies);
 			}
 		}
+		else if (msg.content === "!boi") {
+				if(playing) {
+								msg.reply("I'm a-a-am already cummy cummied, do I need boiborton to play more?! OwO");
+				} else {
+								playing = true;
+								cum(msg, boiborton);
+				}
+		}
 		else if (msg.content === "!radio") {
 			if(playing) {
-				msg.reply("Testing has to finish before you can come. Science has now validated your birth mother's decision to abandon you on a doorstep.");
-			} else {
-				playing = true;
-				cum(msg, portal);
-			}
+          msg.reply("Testing has to finish before you can come. Science has now validated your birth mother's decision to abandon you on a doorstep.");
+      } else {
+          playing = true;
+          if(wildride()) {
+                  wild = true;
+                  msg.reply("Welcome to Mrs. GLaDOS wild ride. There is no stopping it...");
+                  cum(msg, longPortal);
+          } else {
+                  cum(msg, portal);
+          }
+      }
+
 		}
 		else if (msg.content === "!kittn") {
 			msg.channel.send("Benjicanine: @Razorkittn I don't think you know the definition of yiff");
 		}
+		else if (msg.content === "!seinfeld") {
+			if(playing) {
+				msg.reply("Please slow down on the bad jokes");
+			} else {
+				playing = true;
+				if(wildride()) {
+					cum(msg, seindfeldRape);
+				} else {
+					cum(msg, seinfeld);
+				}
+			}
+		}
+		else if (msg.content === "!curb") {
+			if(playing) {
+				msg.reply("Please curb you enthusiasm");
+			} else {
+				playing = true;
+				cum(msg, enthusiasm);
+			}
+		}
+		else if (msg.content === "!fuck") {
+			if(playing) {
+				msg.reply("I can't be fucked since my fucks ran off");
+			} else {
+				playing = true;
+				cum(msg, fuck);
+			}
+		}
+		else if (msg.content === "!retarded") {
+			message = "Since you are too retarded to remember what I can do, here is the list: \n";
+			for(i = 0; i < list.length; i++) {
+				message = message + list[i] + "\n";
+			}
+			msg.channel.send(message)
+		}
 		});
 	});
-
+function wildride() {
+    var rand = Math.floor(Math.random() * 10);
+    if(rand === 1) {
+      	return true;
+    }
+    else {
+      	return false;
+    }
+}
 function cum(msg, video) {
 	channel = msg.member.voiceChannel;
 	if(channel === undefined) {
