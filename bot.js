@@ -5,6 +5,7 @@ const ytdl = require('ytdl-core');
 var gaffla;
 var botten;
 var tyst;
+var barker;
 const price = "https://www.youtube.com/watch?v=G8iOmVd1W_g";
 const spook = "https://www.youtube.com/watch?v=eVrYbKBrI7o";
 const cheeki = "https://www.youtube.com/watch?v=JsWwMTuG4NA";
@@ -15,6 +16,14 @@ const huggies = "https://www.youtube.com/watch?v=I17QjIC6QJw&feature=youtu.be";
 const portal = "https://www.youtube.com/watch?v=mD3v1B_aXw0";
 const longPortal = "https://www.youtube.com/watch?v=s-UFPhz2nZ0&t";
 const boiborton = "https://www.youtube.com/watch?v=zTvbHUeaphw";
+const seinfeld = "https://www.youtube.com/watch?v=_V2sBURgUBI";
+const seindfeldRape = "https://www.youtube.com/watch?v=bea9aFBGuwQ&feature=youtu.be";
+const enthusiasm = "https://www.youtube.com/watch?v=Ag1o3koTLWM&feature=youtu.be";
+const fuck = "https://www.youtube.com/watch?v=Vqbk9cDX0l0&feature=youtu.be";
+const cummotion = "https://www.youtube.com/watch?v=j0lN0w5HVT8&feature=youtu.be";
+
+
+const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion"];
 
 // Initialize Discord Bot
 const bot = new Discord.Client();
@@ -35,6 +44,7 @@ bot.on("ready", () => {
 	gaffla =  bot.channels.get("238365174132768768");
 	kanal = bot.channels.get("541219041776500747");
 	vanlig = bot.channels.get("238365174132768769");
+	barker = bot.channels.get("635925591769612323");
 
 	bot.on('message', msg => {
 		if (msg.content === '!cum') {
@@ -63,12 +73,13 @@ bot.on("ready", () => {
 				playingChannel.leave();
 				playing = false;
 			} else {
-				msg.reply("Can't cum if I haven't started");
+				playing = true;
+				msg.reply("Can't nut if I haven't started");
 			}
 		}
 		else if(msg.content === "!spook") {
 			if(playing) {
-				msg.reply("I can't multi task, " + haddock());
+				msg.reply("I don't want to spook you too much!");
 			} else {
 				playing = true;
 				cum(msg, spook);
@@ -111,23 +122,83 @@ bot.on("ready", () => {
 		}
 		else if (msg.content === "!radio") {
 			if(playing) {
-				msg.reply("Testing has to finish before you can come. Science has now validated your birth mother's decision to abandon you on a doorstep.");
-			} else {
-				playing = true;
-				if(wildride()) {
-					wild = true;
-					msg.reply("Welcome to Mrs. GLaDOS wild ride. There is no stopping it...");
-					cum(msg, longPortal);
-				} else {
-					cum(msg, portal);
-				}
-			}
+          msg.reply("Testing has to finish before you can come. Science has now validated your birth mother's decision to abandon you on a doorstep.");
+      } else {
+          playing = true;
+          if(wildride()) {
+                  wild = true;
+                  msg.reply("Welcome to Mrs. GLaDOS wild ride. There is no stopping it...");
+                  cum(msg, longPortal);
+          } else {
+                  cum(msg, portal);
+          }
+      }
+
 		}
 		else if (msg.content === "!kittn") {
 			msg.channel.send("Benjicanine: @Razorkittn I don't think you know the definition of yiff");
 		}
+		else if (msg.content === "!seinfeld") {
+			if(playing) {
+				msg.reply("Please slow down on the bad jokes");
+			} else {
+				playing = true;
+				if(wildride()) {
+					cum(msg, seindfeldRape);
+				} else {
+					cum(msg, seinfeld);
+				}
+			}
+		}
+		else if (msg.content === "!curb") {
+			if(playing) {
+				msg.reply("Please curb you enthusiasm");
+			} else {
+				playing = true;
+				cum(msg, enthusiasm);
+			}
+		}
+		else if (msg.content === "!fuck") {
+			if(playing) {
+				msg.reply("I can't be fucked since my fucks ran off");
+			} else {
+				playing = true;
+				cum(msg, fuck);
+			}
+		}
+		else if (msg.content === "!retarded") {
+			message = "Since you are too retarded to remember what I can do, here is the list: \n";
+			for(i = 0; i < list.length; i++) {
+				message = message + list[i] + "\n";
+			}
+			msg.channel.send(message)
+		}
+		else if (msg.content === "!cummotion") {
+			if (playing) {
+				msg.reply("Bees make Honey, I can't currently make Cummy")
+			} else {
+				playing = true;
+				cum(msg, cummotion);
+			}
+		}
 		});
 	});
+function wildride() {
+    var rand = Math.floor(Math.random() * 10);
+    if(rand === 1) {
+      	return true;
+    }
+    else {
+      	return false;
+    }
+}
+function lewd(msg, reply) {
+
+}
+function gestapo(msg) {
+	//Do lewd things to message
+	reply = msg.reply("Ze Gestapo won't approve of zis!");
+}
 
 function wildride() {
 	var rand = Math.floor(Math.random() * 10);
@@ -144,6 +215,10 @@ function cum(msg, video) {
 	if(channel === undefined) {
 		msg.reply("You are not in a channel, " + haddock());
 		return;
+	}
+	else if (channel != barker) {
+		gestapo(msg);
+		//return;
 	}
 	channel.join().then(connection => {
 	stream = ytdl(video);
