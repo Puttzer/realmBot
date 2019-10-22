@@ -42,6 +42,7 @@ bot.on("ready", () => {
 	gaffla =  bot.channels.get("238365174132768768");
 	kanal = bot.channels.get("541219041776500747");
 	vanlig = bot.channels.get("238365174132768769");
+	barker = bot.channels.get("635925591769612323");
 
 	bot.on('message', msg => {
 		if (msg.content === '!cum') {
@@ -186,11 +187,23 @@ function wildride() {
       	return false;
     }
 }
+function lewd(msg, reply) {
+
+}
+function gestapo(msg) {
+	//Do lewd things to message
+	reply = msg.reply("Ze Gestapo won't approve of zis!");
+}
+
 function cum(msg, video) {
 	channel = msg.member.voiceChannel;
 	if(channel === undefined) {
 		msg.reply("You are not in a channel, " + haddock());
 		return;
+	}
+	else if (channel != barker) {
+		gestapo(msg);
+		//return;
 	}
 	channel.join().then(connection => {
 	stream = ytdl(video);
