@@ -13,12 +13,16 @@ const nuzzle = "https://www.youtube.com/watch?v=h6DNdop6pD8";
 const cummies = "https://www.youtube.com/watch?v=CxVDnpsGTZY";
 const huggies = "https://www.youtube.com/watch?v=I17QjIC6QJw&feature=youtu.be";
 const portal = "https://www.youtube.com/watch?v=mD3v1B_aXw0";
+const longPortal = "https://www.youtube.com/watch?v=s-UFPhz2nZ0&t";
+const boiborton = "https://www.youtube.com/watch?v=zTvbHUeaphw";
 
 // Initialize Discord Bot
 const bot = new Discord.Client();
 playing = false;
 playingChannel = null;
-player = null
+player = null;
+wild = false;
+
 bot.on("ready", () => {
 	console.log("Skrothög startad");
 	bot.user.setPresence({
@@ -51,12 +55,14 @@ bot.on("ready", () => {
 			}
 		}
 		else if(msg.content === "!nutted") {
-			if(playing) {
+			if(wild) {
+				msg.reply(" wants to get off Mrs. GLaDOS wild ride!");
+			}
+			else if(playing) {
 				msg.channel.send({files: ['nutted.png']})
 				playingChannel.leave();
 				playing = false;
 			} else {
-				playing = true;
 				msg.reply("Can't cum if I haven't started");
 			}
 		}
@@ -95,12 +101,26 @@ bot.on("ready", () => {
 				cum(msg, cummies);
 			}
 		}
+		else if (msg.content === "!boi") {
+			if(playing) {
+				msg.reply("I'm a-a-am already cummy cummied, do I need boiborton to play more?! OwO");
+			} else {
+				playing = true;
+				cum(msg, boiborton);
+			}
+		}
 		else if (msg.content === "!radio") {
 			if(playing) {
 				msg.reply("Testing has to finish before you can come. Science has now validated your birth mother's decision to abandon you on a doorstep.");
 			} else {
 				playing = true;
-				cum(msg, portal);
+				if(wildride()) {
+					wild = true;
+					msg.reply("Welcome to Mrs. GLaDOS wild ride. There is no stopping it...");
+					cum(msg, longPortal);
+				} else {
+					cum(msg, portal);
+				}
 			}
 		}
 		else if (msg.content === "!kittn") {
@@ -109,6 +129,16 @@ bot.on("ready", () => {
 		});
 	});
 
+function wildride() {
+	var rand = Math.floor(Math.random() * 10);
+	if(rand === 1) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}	
+	
 function cum(msg, video) {
 	channel = msg.member.voiceChannel;
 	if(channel === undefined) {
@@ -127,6 +157,7 @@ function cum(msg, video) {
 	dispatcher.on('end', () => {
 		console.log("ended...")
 		playing = false;
+		wild = false;
 		playingChannel = null;
 		player = null;
 		channel.leave();
@@ -135,6 +166,7 @@ function cum(msg, video) {
 	dispatcher.on('error', e => {
 		// Catch any errors that may arise
 		playing = false;
+		wild = false;
 		playingChannel = null;
 		player = null;
 		channel.leave();
