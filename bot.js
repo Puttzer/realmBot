@@ -5,6 +5,7 @@ const ytdl = require('ytdl-core');
 var gaffla;
 var botten;
 var tyst;
+var barker;
 const price = "https://www.youtube.com/watch?v=G8iOmVd1W_g";
 const spook = "https://www.youtube.com/watch?v=eVrYbKBrI7o";
 const cheeki = "https://www.youtube.com/watch?v=JsWwMTuG4NA";
