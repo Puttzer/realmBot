@@ -25,7 +25,7 @@ const cummotion = "https://www.youtube.com/watch?v=j0lN0w5HVT8&feature=youtu.be"
 
 const barkerId = "635925591769612323";
 
-const cats = ["sadcat1.jpg", "sadcat2.png", "sadcat3.jpg", "sadcat4.jpg", "sadcat5.jpg", "sadcat6.jpg"];
+const cats = ["sadcat1.jpg", "sadcat2.png", "sadcat3.jpg", "sadcat4.jpg", "sadcat5.jpg", "sadcat6.jpg", "sadcat7.jpg", "sadcat8.jpg", "sadcat9.jpg", "sadcat10.jpg"];
 const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion"];
 
 // Initialize Discord Bot
@@ -51,138 +51,144 @@ bot.on("ready", () => {
 	dungeon = bot.channels.get("613738920009662474");
 
 	bot.on('message', msg => {
-		if (msg.content === '!cum') {
-			if(playing) {
-				msg.reply("I can only !cum so much!");
-			} else {
-				playing = true;
-				cum(msg, price);
-			}
-
-		}
-		else if(msg.content === "!huggies") {
-			if(playing) {
-				msg.reply("Not done pouncing somebody else, UWU <3");
-			} else {
-				playing = true;
-				cum(msg, huggies);
-			}
-		}
-		else if(msg.content === "!nutted") {
-			if(wild) {
-				msg.reply(" wants to get off Mrs. GLaDOS wild ride!");
-			}
-			else if(playing) {
-				msg.channel.send({files: ['nutted.png']})
-				playingChannel.leave();
-				playing = false;
-			} else {
-				playing = true;
-				msg.reply("Can't nut if I haven't started");
-			}
-		}
-		else if(msg.content === "!spook") {
-			if(playing) {
-				msg.reply("I don't want to spook you too much!");
-			} else {
-				playing = true;
-				cum(msg, spook);
-			}
-		}
-		else if(msg.content === "!blyat") {
-			if(playing) {
-				msg.reply("Я могу сделать только одну вещь одновременно, сука");
-			} else {
-				playing = true;
-				cum(msg, cheeki);
-			}
-		}
-		else if(msg.content === "!owo") {
-			msg.channel.send("*Notices bulge* OwO What's this?", {tts:true})
-		}
-		else if(msg.content === "!nuzzle") {
-			if(playing) {
-				msg.reply("Pwease don't pweassuwe me  （งΦ Д Φ）ง");
-			} else {
-				playing = true;
-				cum(msg, nuzzle);
-			}
-		}
-		else if (msg.content === "!cummies") {
-			if(playing) {
-				msg.reply("The cummies are not done yet, daddy XD");
-			} else {
-				playing = true;
-				cum(msg, cummies);
-			}
-		}
-		else if (msg.content === "!boi") {
-			if(playing) {
-				msg.reply("I'm a-a-am already cummy cummied, do I need boiborton to play more?! OwO");
-			} else {
-				playing = true;
-				cum(msg, boiborton);
-			}
-		}
-		else if (msg.content === "!radio") {
-			if(playing) {
-          msg.reply("Testing has to finish before you can come. Science has now validated your birth mother's decision to abandon you on a doorstep.");
-      } else {
-          playing = true;
-          if(wildride()) {
-                  wild = true;
-                  msg.reply("Welcome to Mrs. GLaDOS wild ride. There is no stopping it...");
-                  cum(msg, longPortal);
-          } else {
-                  cum(msg, portal);
-          }
-      }
-
-		}
-		else if (msg.content === "!kittn") {
-			msg.channel.send("Benjicanine: @Razorkittn I don't think you know the definition of yiff");
-		}
-		else if (msg.content === "!seinfeld") {
-			if(playing) {
-				msg.reply("Please slow down on the bad jokes");
-			} else {
-				playing = true;
-				if(wildride()) {
-					cum(msg, seindfeldRape);
+		if((player === undefined || player === null) && playing) {
+			borkenCat();
+			player = null;
+			playing = false;
+		} else {
+			if (msg.content === '!cum') {
+				if(playing) {
+					msg.reply("I can only !cum so much!");
 				} else {
-					cum(msg, seinfeld);
+					playing = true;
+					cum(msg, price);
+				}
+
+			}
+			else if(msg.content === "!huggies") {
+				if(playing) {
+					msg.reply("Not done pouncing somebody else, UWU <3");
+				} else {
+					playing = true;
+					cum(msg, huggies);
 				}
 			}
-		}
-		else if (msg.content === "!curb") {
-			if(playing) {
-				msg.reply("Please curb you enthusiasm");
-			} else {
-				playing = true;
-				cum(msg, enthusiasm);
+			else if(msg.content === "!nutted") {
+				if(wild) {
+					msg.reply(" wants to get off Mrs. GLaDOS wild ride!");
+				}
+				else if(playing) {
+					msg.channel.send({files: ['nutted.png']})
+					playingChannel.leave();
+					playing = false;
+				} else {
+					playing = true;
+					msg.reply("Can't nut if I haven't started");
+				}
 			}
-		}
-		else if (msg.content === "!fuck") {
-			if(playing) {
-				msg.reply("I can't be fucked since my fucks ran off");
-			} else {
-				playing = true;
-				cum(msg, fuck);
+			else if(msg.content === "!spook") {
+				if(playing) {
+					msg.reply("I don't want to spook you too much!");
+				} else {
+					playing = true;
+					cum(msg, spook);
+				}
 			}
-		}
-		else if (msg.content === "!retarded") {
-			message = "Since you are too retarded to remember what I can do, here is the list: \n";
-			for(i = 0; i < list.length; i++) {
-				message = message + list[i] + "\n";
+			else if(msg.content === "!blyat") {
+				if(playing) {
+					msg.reply("Я могу сделать только одну вещь одновременно, сука");
+				} else {
+					playing = true;
+					cum(msg, cheeki);
+				}
 			}
-			msg.channel.send(message)
-		}
-		else if (msg.content === "!cummotion") {
-			if (playing) {
-				msg.reply("Bees make Honey, I can't currently make Cummy")
-			} else {
-				playing = true;
-				cum(msg, cummotion);
+			else if(msg.content === "!owo") {
+				msg.channel.send("*Notices bulge* OwO What's this?", {tts:true})
+			}
+			else if(msg.content === "!nuzzle") {
+				if(playing) {
+					msg.reply("Pwease don't pweassuwe me  （งΦ Д Φ）ง");
+				} else {
+					playing = true;
+					cum(msg, nuzzle);
+				}
+			}
+			else if (msg.content === "!cummies") {
+				if(playing) {
+					msg.reply("The cummies are not done yet, daddy XD");
+				} else {
+					playing = true;
+					cum(msg, cummies);
+				}
+			}
+			else if (msg.content === "!boi") {
+				if(playing) {
+					msg.reply("I'm a-a-am already cummy cummied, do I need boiborton to play more?! OwO");
+				} else {
+					playing = true;
+					cum(msg, boiborton);
+				}
+			}
+			else if (msg.content === "!radio") {
+				if(playing) {
+	          msg.reply("Testing has to finish before you can come. Science has now validated your birth mother's decision to abandon you on a doorstep.");
+	      } else {
+	          playing = true;
+	          if(wildride()) {
+	                  wild = true;
+	                  msg.reply("Welcome to Mrs. GLaDOS wild ride. There is no stopping it...");
+	                  cum(msg, longPortal);
+	          } else {
+	                  cum(msg, portal);
+	          }
+	      }
+
+			}
+			else if (msg.content === "!kittn") {
+				msg.channel.send("Benjicanine: @Razorkittn I don't think you know the definition of yiff");
+			}
+			else if (msg.content === "!seinfeld") {
+				if(playing) {
+					msg.reply("Please slow down on the bad jokes");
+				} else {
+					playing = true;
+					if(wildride()) {
+						cum(msg, seindfeldRape);
+					} else {
+						cum(msg, seinfeld);
+					}
+				}
+			}
+			else if (msg.content === "!curb") {
+				if(playing) {
+					msg.reply("Please curb you enthusiasm");
+				} else {
+					playing = true;
+					cum(msg, enthusiasm);
+				}
+			}
+			else if (msg.content === "!fuck") {
+				if(playing) {
+					msg.reply("I can't be fucked since my fucks ran off");
+				} else {
+					playing = true;
+					cum(msg, fuck);
+				}
+			}
+			else if (msg.content === "!retarded") {
+				message = "Since you are too retarded to remember what I can do, here is the list: \n";
+				for(i = 0; i < list.length; i++) {
+					message = message + list[i] + "\n";
+				}
+				msg.channel.send(message)
+			}
+			else if (msg.content === "!cummotion") {
+				if (playing) {
+					msg.reply("Bees make Honey, I can't currently make Cummy")
+				} else {
+					playing = true;
+					cum(msg, cummotion);
+				}
 			}
 		}
 		});
@@ -198,7 +204,7 @@ function wildride() {
 }
 function lewd(msg, reply) {
 	chan = msg.channel;
-	console.log("Inte Niklas fel!")
+	console.log("Inte Niklas fel!");
 	retard = msg.member;
 	retard.setVoiceChannel(dungeon);
 	new Promise(resolve => {
@@ -236,8 +242,8 @@ function wildride() {
 	else {
 		return false;
 	}
-}	
-	
+}
+
 function cum(msg, video) {
 	channel = msg.member.voiceChannel;
 	if(channel === undefined) {
