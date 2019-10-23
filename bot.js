@@ -22,6 +22,7 @@ const seindfeldRape = "https://www.youtube.com/watch?v=bea9aFBGuwQ&feature=youtu
 const enthusiasm = "https://www.youtube.com/watch?v=Ag1o3koTLWM&feature=youtu.be";
 const fuck = "https://www.youtube.com/watch?v=TXK03FHVsHk";
 const cummotion = "https://www.youtube.com/watch?v=j0lN0w5HVT8&feature=youtu.be";
+const myanee = "https://www.youtube.com/watch?v=cd5QuZq5jmg&feature=youtu.be";
 
 const barkerId = "635925591769612323";
 
@@ -183,6 +184,14 @@ bot.on("ready", () => {
 			} else {
 				playing = true;
 				cum(msg, cummotion);
+			}
+		}
+		else if (msg.content === "!gay") {
+			if(playing) {
+				msg.reply("I turned this into a commando now. Want to see what it is? ")
+			} else {
+				playing = true;
+				cum(msg, myanee);
 			}
 		}
 	});
