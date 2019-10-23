@@ -6,6 +6,7 @@ var gaffla;
 var botten;
 var tyst;
 var barker;
+var dungeon;
 const price = "https://www.youtube.com/watch?v=G8iOmVd1W_g";
 const spook = "https://www.youtube.com/watch?v=eVrYbKBrI7o";
 const cheeki = "https://www.youtube.com/watch?v=JsWwMTuG4NA";
@@ -22,7 +23,9 @@ const enthusiasm = "https://www.youtube.com/watch?v=Ag1o3koTLWM&feature=youtu.be
 const fuck = "https://www.youtube.com/watch?v=Vqbk9cDX0l0&feature=youtu.be";
 const cummotion = "https://www.youtube.com/watch?v=j0lN0w5HVT8&feature=youtu.be";
 
+const barkerId = "635925591769612323";
 
+const cats = ["sadcat1.jpg", "sadcat2.png", "sadcat3.jpg", "sadcat4.jpg", "sadcat5.jpg", "sadcat6.jpg"];
 const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion"];
 
 // Initialize Discord Bot
@@ -45,6 +48,7 @@ bot.on("ready", () => {
 	kanal = bot.channels.get("541219041776500747");
 	vanlig = bot.channels.get("238365174132768769");
 	barker = bot.channels.get("635925591769612323");
+	dungeon = bot.channels.get("613738920009662474");
 
 	bot.on('message', msg => {
 		if (msg.content === '!cum') {
@@ -193,11 +197,35 @@ function wildride() {
     }
 }
 function lewd(msg, reply) {
+	chan = msg.channel;
+	console.log("Inte Niklas fel!")
+	retard = msg.member;
+	retard.setVoiceChannel(dungeon);
+	new Promise(resolve => {
+		setTimeout(function() {
+		  resolve("slow");
+			msg.delete().catch(function() {
+				borkenCat();
+			});
+			reply.delete().catch(function() {
+				borkenCat();
+			});
+		}, 10000);
+	  });
+
 
 }
 function gestapo(msg) {
 	//Do lewd things to message
-	reply = msg.reply("Ze Gestapo won't approve of zis!");
+	msg.reply("Ze Gestapo won't approve of zis! To ze dungeon with you!").then(reply => {
+		lewd(msg, reply);
+	});
+}
+
+function borkenCat() {
+	main_text.send("You broke something =(");
+	var cat = cats[Math.floor(Math.random() * cats.length)];
+	main_text.send({files: [cat]});
 }
 
 function wildride() {
@@ -216,9 +244,10 @@ function cum(msg, video) {
 		msg.reply("You are not in a channel, " + haddock());
 		return;
 	}
-	else if (channel != barker) {
+	else if (msg.channel.id !== barkerId) {
+		playing = false;
 		gestapo(msg);
-		//return;
+		return;
 	}
 	channel.join().then(connection => {
 	stream = ytdl(video);
@@ -240,6 +269,7 @@ function cum(msg, video) {
 
 	dispatcher.on('error', e => {
 		// Catch any errors that may arise
+		borkenCat();
 		playing = false;
 		wild = false;
 		playingChannel = null;
