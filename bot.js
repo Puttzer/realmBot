@@ -24,6 +24,14 @@ const fuck = "https://www.youtube.com/watch?v=TXK03FHVsHk";
 const cummotion = "https://www.youtube.com/watch?v=j0lN0w5HVT8&feature=youtu.be";
 const myanee = "https://www.youtube.com/watch?v=cd5QuZq5jmg&feature=youtu.be";
 const march = "https://www.youtube.com/watch?v=RmHkx9P19hg";
+const kitchen = "https://www.youtube.com/watch?v=SFtLvkqHIds";
+const sauce = "https://www.youtube.com/watch?v=uW6nkqUmnYU";
+const imout = "https://www.youtube.com/watch?v=5FjWe31S_0g";
+
+
+const karlsson = "140204591521333248";
+const niklas = "214496518692929537";
+const botID = "423191655135313930";
 
 const barkerId = "635925591769612323";
 
@@ -53,10 +61,12 @@ bot.on("ready", () => {
 	dungeon = bot.channels.get("613738920009662474");
 
 	bot.on('message', msg => {
-		if(msg.author.id === '423191655135313930') {
+		//Ignore the bot
+		if(msg.author.id === botID) {
 			return;
 		}
-		if(msg.channel.type === 'dm' && msg.author.id === "214496518692929537") {
+		if(msg.channel.type === 'dm' && msg.author.id === niklas) {
+
 			if(msg.content === "!stop") {
 				playing = false;
 				wild = false;
@@ -68,6 +78,7 @@ bot.on("ready", () => {
 				soundplayer(march, channel);
 			}
 		} else {
+			// I know a switch-case would be perfect for this, but i'm too lazy to change it now
 			if (msg.content === '!cum') {
 				if(playing) {
 					msg.reply("I can only !cum so much!");
@@ -196,7 +207,7 @@ bot.on("ready", () => {
 			}
 			else if (msg.content === "!cummotion") {
 				if (playing) {
-					msg.reply("Bees make Honey, I can't currently make Cummy")
+					msg.reply("Bees are making Honey, I can't currently make Cummy")
 				} else {
 					playing = true;
 					cum(msg, cummotion);
@@ -213,7 +224,40 @@ bot.on("ready", () => {
 		}
 		
 	});
+	//For playing certain things when certain people join
+	bot.on('voiceStateUpdate', (oldMember, newMember) => {
+		//console.log(oldMember);
+		user = newMember.user;
+		if(user.id === karlsson) {
+			if(wildride()) {
+				checkWhenJoin(oldMember, newMember, sauce);
+			} else {
+				checkWhenJoin(oldMember, newMember, kitchen);
+			}
+		}
+	});
 });
+
+function checkWhenJoin(oldMember, newMember, video) {
+	if(newMember.voiceChannelID !== null && newMember.voiceChannelID !== undefined) {
+		//If user was not in a channel before (in any guild)
+		if(oldMember.voiceChannelID === undefined) {
+			if(!playing) {
+				playing = true;
+				soundplayer(video, newMember.voiceChannel);
+			}
+		} else {
+			//User was not in a channel before on this server.
+			//or has been on this server earlier without disconnecting in between. 
+			if(oldMember.voiceChannelID === null) {
+				if(!playing) {
+					playing = true;
+					soundplayer(video, newMember.voiceChannel);
+				}
+			}
+		}
+	}
+}
 
 /*
 		console.log("New command")
@@ -307,6 +351,8 @@ function soundplayer(video, channel, option) {
 			console.log(e);
 		});
 
+}).catch(function() {
+	borkenCat();
 })
 }
 
@@ -332,7 +378,7 @@ bot.on("presenceUpdate", async (oldMember, newMember) => {
 		if( newMember.presence.game.name == "Realm Grinder") {
 			console.log(newMember.nickname + " kör Realm Grinder");
 			spam(newMember.user);
-			gaffla.send("Stop playing realmgrinder, " + newMember.nickname, {tts:true});
+			gaffla.send("Stop playing realmgrinder, " + newMember.nickname);
 			if(!tyst) {
 				console.log("Jag sade det högt");
 				botten.send(newMember.nickname + ", sluta spela Realm Grinder, " + haddock()+"!");
