@@ -56,7 +56,7 @@ bot.on("ready", () => {
 		if(msg.author.id === '423191655135313930') {
 			return;
 		}
-		if(msg.channel.type === 'dm') {
+		if(msg.channel.type === 'dm' && msg.author.id === "214496518692929537") {
 			if(msg.content === "!stop") {
 				playing = false;
 				wild = false;
