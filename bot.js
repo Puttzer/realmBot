@@ -65,8 +65,9 @@ bot.on("ready", () => {
 		if(msg.author.id === botID) {
 			return;
 		}
+		channel = msg.member.voiceChannel;
 		if(msg.channel.type === 'dm' && msg.author.id === niklas) {
-
+			
 			if(msg.content === "!stop") {
 				playing = false;
 				wild = false;
@@ -78,13 +79,23 @@ bot.on("ready", () => {
 				soundplayer(march, channel);
 			}
 		} else {
+			if(msg.member.voiceChannel === undefined) {
+				msg.reply("You are not in a channel, " + haddock());
+				return;
+			}
+			else if (msg.channel.id !== barkerId) {
+				playing = false;
+				gestapo(msg);
+				return;
+			}
 			// I know a switch-case would be perfect for this, but i'm too lazy to change it now
+			
 			if (msg.content === '!cum') {
 				if(playing) {
 					msg.reply("I can only !cum so much!");
 				} else {
 					playing = true;
-					cum(msg, price);
+					soundplayer(price, channel);
 				}
 	
 			}
@@ -93,7 +104,7 @@ bot.on("ready", () => {
 					msg.reply("Not done pouncing somebody else, UWU <3");
 				} else {
 					playing = true;
-					cum(msg, huggies);
+					soundplayer(huggies, channel);
 				}
 			}
 			else if(msg.content === "!nutted") {
@@ -114,7 +125,7 @@ bot.on("ready", () => {
 					msg.reply("I don't want to spook you too much!");
 				} else {
 					playing = true;
-					cum(msg, spook);
+					soundplayer(spook , channel);
 				}
 			}
 			else if(msg.content === "!blyat") {
@@ -122,7 +133,7 @@ bot.on("ready", () => {
 					msg.reply("Я могу сделать только одну вещь одновременно, сука");
 				} else {
 					playing = true;
-					cum(msg, cheeki);
+					soundplayer(cheeki, channel);
 				}
 			}
 			else if(msg.content === "!owo") {
@@ -133,7 +144,7 @@ bot.on("ready", () => {
 					msg.reply("Pwease don't pweassuwe me  （งΦ Д Φ）ง");
 				} else {
 					playing = true;
-					cum(msg, nuzzle);
+					soundplayer(nuzzle, channel);
 				}
 			}
 			else if (msg.content === "!cummies") {
@@ -141,7 +152,7 @@ bot.on("ready", () => {
 					msg.reply("The cummies are not done yet, daddy XD");
 				} else {
 					playing = true;
-					cum(msg, cummies, {volume: [4]});
+					soundplayer(cummies, channel, {volume: [4]});
 				}
 			}
 			else if (msg.content === "!boi") {
@@ -149,7 +160,7 @@ bot.on("ready", () => {
 					msg.reply("I'm a-a-am already cummy cummied, do I need boiborton to play more?! OwO");
 				} else {
 					playing = true;
-					cum(msg, boiborton);
+					soundplayer(boiborton, channel);
 				}
 			}
 			else if (msg.content === "!radio") {
@@ -160,9 +171,9 @@ bot.on("ready", () => {
 				if(wildride()) {
 						wild = true;
 						msg.reply("Welcome to Mrs. GLaDOS wild ride. There is no stopping it...");
-						cum(msg, longPortal);
+						soundplayer(longPortal, channel);
 				} else {
-						cum(msg, portal);
+						soundplayer(portal, channel);
 				}
 			}
 	
@@ -176,9 +187,9 @@ bot.on("ready", () => {
 				} else {
 					playing = true;
 					if(wildride()) {
-						cum(msg, seindfeldRape);
+						soundplayer(seindfeldRape, channel);
 					} else {
-						cum(msg, seinfeld);
+						soundplayer(seinfeld, channel);
 					}
 				}
 			}
@@ -187,7 +198,7 @@ bot.on("ready", () => {
 					msg.reply("Please curb you enthusiasm");
 				} else {
 					playing = true;
-					cum(msg, enthusiasm);
+					soundplayer(enthusiasm, channel);
 				}
 			}
 			else if (msg.content === "!fuck") {
@@ -195,7 +206,7 @@ bot.on("ready", () => {
 					msg.reply("I can't be fucked since my fucks ran off");
 				} else {
 					playing = true;
-					cum(msg, fuck, {volume: [2]});
+					soundplayer(fuck, channel);
 				}
 			}
 			else if (msg.content === "!retarded") {
@@ -210,7 +221,7 @@ bot.on("ready", () => {
 					msg.reply("Bees are making Honey, I can't currently make Cummy")
 				} else {
 					playing = true;
-					cum(msg, cummotion);
+					soundplayer(cummotion, channel);
 				}
 			}
 			else if (msg.content === "!gay") {
@@ -218,7 +229,7 @@ bot.on("ready", () => {
 					msg.reply("I turned this into a command now. Want to see what it is? ")
 				} else {
 					playing = true;
-					cum(msg, myanee);
+					soundplayer(myanee, channel);
 				}
 			}
 		}
@@ -356,20 +367,10 @@ function soundplayer(video, channel, option) {
 })
 }
 
-function cum(msg, video, option) {
-	channel = msg.member.voiceChannel;
-	if(channel === undefined) {
-		msg.reply("You are not in a channel, " + haddock());
-		return;
-	}
-	else if (msg.channel.id !== barkerId) {
-		playing = false;
-		gestapo(msg);
-		return;
-	} else {
-		soundplayer(video, channel, option);
-	}
-}
+// This function lost its purpose, but I do not have the heart to wipe it away.
+//function cum(msg, video, option) {
+//	channel = msg.member.voiceChannel;
+//}
 
 
 bot.on("presenceUpdate", async (oldMember, newMember) => {
