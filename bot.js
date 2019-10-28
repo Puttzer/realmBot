@@ -27,6 +27,9 @@ const march = "https://www.youtube.com/watch?v=RmHkx9P19hg";
 const kitchen = "https://www.youtube.com/watch?v=SFtLvkqHIds";
 const sauce = "https://www.youtube.com/watch?v=uW6nkqUmnYU";
 const imout = "https://www.youtube.com/watch?v=5FjWe31S_0g";
+const succ = "https://www.youtube.com/watch?v=qFchpvKpYm0";
+const nice = "https://www.youtube.com/watch?v=PMbYzSLLbRE";
+const mandarin = "https://www.youtube.com/watch?v=-cYBOGo0ptk&feature=youtu.be";
 
 
 const karlsson = "140204591521333248";
@@ -84,9 +87,12 @@ bot.on("ready", () => {
 				return;
 			}
 			else if (msg.channel.id !== barkerId) {
-				playing = false;
-				gestapo(msg);
-				return;
+				if(msg.content.charAt(0) === "!") {
+					playing = false;
+					gestapo(msg);
+					return;
+				}
+
 			}
 			// I know a switch-case would be perfect for this, but i'm too lazy to change it now
 			
@@ -232,6 +238,30 @@ bot.on("ready", () => {
 					soundplayer(myanee, channel);
 				}
 			}
+			else if (msg.content === "!succ") {
+				if(playing) {
+					msg.reply("Already succing somebody that actually matters");
+				} else {
+					playing = true;
+					soundplayer(succ, channel);
+				}
+			} 
+			else if (msg.content === "!nice") {
+				if(playing) {
+					msg.reply("This is not noice");
+				} else {
+					playing = true;
+					soundplayer(nice, channel);
+				}
+			} 
+			else if (msg.content === "!mandarin") {
+				if(playing) {
+					msg.reply("\*slurping sounds\*");
+				} else {
+					playing = true;
+					soundplayer(mandarin, channel);
+				}
+			} 
 		}
 		
 	});
