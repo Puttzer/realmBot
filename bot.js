@@ -30,6 +30,7 @@ const imout = "https://www.youtube.com/watch?v=5FjWe31S_0g";
 const succ = "https://www.youtube.com/watch?v=qFchpvKpYm0";
 const nice = "https://www.youtube.com/watch?v=PMbYzSLLbRE";
 const mandarin = "https://www.youtube.com/watch?v=-cYBOGo0ptk&feature=youtu.be";
+const crumpin = "https://www.youtube.com/watch?v=wPbaNQ7RKPM&feature=youtu.be";
 
 
 const karlsson = "140204591521333248";
