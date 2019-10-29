@@ -39,7 +39,7 @@ const botID = "423191655135313930";
 const barkerId = "635925591769612323";
 
 const cats = ["sadcat1.jpg", "sadcat2.png", "sadcat3.jpg", "sadcat4.jpg", "sadcat5.jpg", "sadcat6.jpg", "sadcat7.jpg", "sadcat8.jpg", "sadcat9.jpg", "sadcat10.jpg"];
-const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion"];
+const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin"];
 
 // Initialize Discord Bot
 const bot = new Discord.Client();
@@ -64,6 +64,10 @@ bot.on("ready", () => {
 	dungeon = bot.channels.get("613738920009662474");
 
 	bot.on('message', msg => {
+		//ignore anything that might not be command
+		if(msg.content.charAt(0) !== "!") {
+			return;
+		}
 		//Ignore the bot
 		if(msg.author.id === botID) {
 			return;
@@ -82,18 +86,19 @@ bot.on("ready", () => {
 				soundplayer(march, channel);
 			}
 		} else {
-			if(msg.member.voiceChannel === undefined) {
-				msg.reply("You are not in a channel, " + haddock());
-				return;
-			}
-			else if (msg.channel.id !== barkerId) {
-				if(msg.content.charAt(0) === "!") {
+			if(list.includes(msg.content)) {
+				if(msg.member.voiceChannel === undefined) {
+					msg.reply("You are not in a channel, " + haddock());
+					return;
+				}
+				else if (msg.channel.id !== barkerId) {
 					playing = false;
 					gestapo(msg);
 					return;
-				}
 
+				}
 			}
+
 			// I know a switch-case would be perfect for this, but i'm too lazy to change it now
 			
 			if (msg.content === '!cum') {
