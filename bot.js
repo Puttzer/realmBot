@@ -5,7 +5,6 @@ const ytdl = require('ytdl-core');
 var gaffla;
 var botten;
 var tyst;
-var barker;
 var dungeon;
 const price = "https://www.youtube.com/watch?v=G8iOmVd1W_g";
 const spook = "https://www.youtube.com/watch?v=eVrYbKBrI7o";
@@ -31,6 +30,7 @@ const succ = "https://www.youtube.com/watch?v=qFchpvKpYm0";
 const nice = "https://www.youtube.com/watch?v=PMbYzSLLbRE";
 const mandarin = "https://www.youtube.com/watch?v=-cYBOGo0ptk&feature=youtu.be";
 const crumpin = "https://www.youtube.com/watch?v=wPbaNQ7RKPM&feature=youtu.be";
+const spook2 = "https://www.youtube.com/watch?v=8ujGHnVCnM8";
 
 
 const karlsson = "140204591521333248";
@@ -40,7 +40,7 @@ const botID = "423191655135313930";
 const barkerId = "635925591769612323";
 
 const cats = ["sadcat1.jpg", "sadcat2.png", "sadcat3.jpg", "sadcat4.jpg", "sadcat5.jpg", "sadcat6.jpg", "sadcat7.jpg", "sadcat8.jpg", "sadcat9.jpg", "sadcat10.jpg", "sadcat11.png"];
-const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin"];
+const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump"];
 
 // Initialize Discord Bot
 const bot = new Discord.Client();
@@ -73,7 +73,6 @@ bot.on("ready", () => {
 		if(msg.author.id === botID) {
 			return;
 		}
-		channel = msg.member.voiceChannel;
 		if(msg.channel.type === 'dm' && msg.author.id === niklas) {
 			
 			if(msg.content === "!stop") {
@@ -85,6 +84,17 @@ bot.on("ready", () => {
 				channel = bot.channels.get("613622941695082534")
 				playing = true;
 				soundplayer(march, channel);
+			} else if (msg.content === "!test") {
+				trues = 0;
+				falses = 0;
+				for(i = 0; i < 10000; i++) {
+					if(wildride()) {
+						trues++;
+					} else {
+						falses++;
+					}
+				}
+				console.log("trues: " + trues/10000);
 			}
 		} else {
 			if(list.includes(msg.content)) {
@@ -101,7 +111,7 @@ bot.on("ready", () => {
 			}
 
 			// I know a switch-case would be perfect for this, but i'm too lazy to change it now
-			
+			channel = msg.member.voiceChannel;
 			if (msg.content === '!cum') {
 				if(playing) {
 					msg.reply("I can only !cum so much!");
@@ -137,7 +147,12 @@ bot.on("ready", () => {
 					msg.reply("I don't want to spook you too much!");
 				} else {
 					playing = true;
-					soundplayer(spook , channel);
+					if(halfNhalf()) {
+						soundplayer(spook2, channel);
+					} else {
+						soundplayer(spook , channel);
+					}
+					
 				}
 			}
 			else if(msg.content === "!blyat") {
@@ -268,6 +283,15 @@ bot.on("ready", () => {
 					soundplayer(mandarin, channel);
 				}
 			} 
+			else if (msg.content === "!crump") {
+				if(playing) {
+					msg.reply("Don't worry dear, I will crump with you soon");
+				} else 
+				{
+					playing = true;
+					soundplayer(crumpin, channel);
+				}
+			}
 		}
 		
 	});
@@ -324,6 +348,14 @@ function wildride() {
     else {
       	return false;
     }
+}
+function halfNhalf() {
+	var rand2 = Math.floor(Math.random() * 10);
+	if(rand2 < 5) {
+		return true;
+	} else {
+		return false;
+	}
 }
 function lewd(msg, reply) {
 	chan = msg.channel;
