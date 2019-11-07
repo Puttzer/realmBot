@@ -21,7 +21,7 @@ const seindfeldRape = "https://www.youtube.com/watch?v=bea9aFBGuwQ&feature=youtu
 const enthusiasm = "https://www.youtube.com/watch?v=Ag1o3koTLWM&feature=youtu.be";
 const fuck = "https://www.youtube.com/watch?v=TXK03FHVsHk";
 const cummotion = "https://www.youtube.com/watch?v=j0lN0w5HVT8&feature=youtu.be";
-const myanee = "https://www.youtube.com/watch?v=cd5QuZq5jmg&feature=youtu.be";
+const myanee = "https://www.youtube.com/watch?v=ppjdSw8sWBg";
 const march = "https://www.youtube.com/watch?v=RmHkx9P19hg";
 const kitchen = "https://www.youtube.com/watch?v=SFtLvkqHIds";
 const sauce = "https://www.youtube.com/watch?v=uW6nkqUmnYU";
@@ -38,6 +38,7 @@ const niklas = "214496518692929537";
 const botID = "423191655135313930";
 
 const barkerId = "635925591769612323";
+const barkerVoice = "423191655135313930";
 
 const cats = ["sadcat1.jpg", "sadcat2.png", "sadcat3.jpg", "sadcat4.jpg", "sadcat5.jpg", "sadcat6.jpg", "sadcat7.jpg", "sadcat8.jpg", "sadcat9.jpg", "sadcat10.jpg", "sadcat11.png"];
 const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump"];
@@ -48,6 +49,7 @@ playing = false;
 playingChannel = null;
 player = null;
 wild = false;
+afking = false;
 
 bot.on("ready", () => {
 	console.log("Skrothög startad");
@@ -78,6 +80,10 @@ bot.on("ready", () => {
 			if(msg.content === "!stop") {
 				playing = false;
 				wild = false;
+				afking = false;
+				if(player !== null) {
+					player.end();
+				}
 				playingChannel.leave();
 				player = null;
 			} else if(msg.content === "!march") {
@@ -85,16 +91,8 @@ bot.on("ready", () => {
 				playing = true;
 				soundplayer(march, channel);
 			} else if (msg.content === "!test") {
-				trues = 0;
-				falses = 0;
-				for(i = 0; i < 10000; i++) {
-					if(wildride()) {
-						trues++;
-					} else {
-						falses++;
-					}
-				}
-				console.log("trues: " + trues/10000);
+				afking = true;
+				afkPlayer()
 			}
 		} else {
 			if(list.includes(msg.content)) {
@@ -398,8 +396,47 @@ function wildride() {
 		return false;
 	}
 }
+//This one will differ in not so subtle ways, easier to add a new one
+function afkPlayer() {
+	dungeon.join().then(connection => {
+		stream = ytdl(longPortal);
+		const dispatcher = connection.playStream(stream);
+
+		dispatcher.on('start', () => {
+			playa = dungeon.members.get(botID);
+			playa.setMute(true);
+			playa.setMute(false);
+			playingChannel = dungeon
+			player = dispatcher;
+		});
+		dispatcher.on('end', () => {
+			console.log("ended...")
+			playingChannel = null;
+			player = null;
+			afking = false;
+			dungeon.leave();
+		});
+
+		dispatcher.on('error', e => {
+			// Catch any errors that may arise
+			borkenCat();
+			playingChannel = null;
+			dungeon.leave();
+			player = null;
+			afking = false;
+			console.log(e);
+		});
+
+}).catch(function() {
+	borkenCat();
+})
+}
+
 
 function soundplayer(video, channel, option) {
+	if(player !== undefined && player !== null) {
+		player.end();
+	}
 	channel.join().then(connection => {
 		stream = ytdl(video);
 		streamOpt = option;
@@ -407,6 +444,7 @@ function soundplayer(video, channel, option) {
 
 		dispatcher.on('start', () => {
 			console.log("Started!")
+			playa = channel.members.get(botID);
 			playingChannel = channel
 			player = dispatcher;
 		});
