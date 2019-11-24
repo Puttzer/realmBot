@@ -45,7 +45,7 @@ const barkerVoice = "423191655135313930";
 
 const cats = ["sadcat1.jpg", "sadcat2.png", "sadcat3.jpg", "sadcat4.jpg", "sadcat5.jpg", "sadcat6.jpg", "sadcat7.jpg", "sadcat8.jpg", "sadcat9.jpg", "sadcat10.jpg", "sadcat11.png"];
 const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump", "!gay"];
-const julen = ["https://www.youtube.com/watch?v=MgIwLeASnkw&feature=youtu.be", "https://www.youtube.com/watch?v=yXQViqx6GMY&feature=youtu.be", "https://www.youtube.com/watch?v=2QDzwBy55Uk&feature=youtu.be"];
+const julen = ["https://www.youtube.com/watch?v=MgIwLeASnkw&feature=youtu.be", "https://www.youtube.com/watch?v=PIkA_cUpKl8&feature=youtu.be", "https://www.youtube.com/watch?v=2QDzwBy55Uk&feature=youtu.be", "https://www.youtube.com/watch?v=n4VsfRc2IjE&feature=youtu.be", "https://www.youtube.com/watch?v=8JBHjDEHBFo&feature=youtu.be", "https://www.youtube.com/watch?v=AU85slFVskA&feature=youtu.be", "https://www.youtube.com/watch?v=iWcve_5apj0", "https://www.youtube.com/watch?v=JdbTlhKDxEI&feature=youtu.be"];
 // Initialize Discord Bot
 const bot = new Discord.Client();
 playing = false;
