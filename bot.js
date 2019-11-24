@@ -15,14 +15,14 @@ const cummies = "https://www.youtube.com/watch?v=CxVDnpsGTZY";
 const huggies = "https://www.youtube.com/watch?v=I17QjIC6QJw&feature=youtu.be";
 const portal = "https://www.youtube.com/watch?v=mD3v1B_aXw0";
 const longPortal = "https://www.youtube.com/watch?v=s-UFPhz2nZ0&t";
-const boiborton = "https://www.youtube.com/watch?v=zTvbHUeaphw";
+const boiborton = "https://www.youtube.com/watch?v=SAZzpaWpGIA";
 const seinfeld = "https://www.youtube.com/watch?v=_V2sBURgUBI";
 const seindfeldRape = "https://www.youtube.com/watch?v=bea9aFBGuwQ&feature=youtu.be";
 const enthusiasm = "https://www.youtube.com/watch?v=Ag1o3koTLWM&feature=youtu.be";
 const fuck = "https://www.youtube.com/watch?v=TXK03FHVsHk";
 const cummotion = "https://www.youtube.com/watch?v=j0lN0w5HVT8&feature=youtu.be";
 const myanee = "https://www.youtube.com/watch?v=ppjdSw8sWBg";
-const march = "https://www.youtube.com/watch?v=RmHkx9P19hg";
+const march = "https://www.youtube.com/watch?v=-bzWSJG93P8";
 const kitchen = "https://www.youtube.com/watch?v=SFtLvkqHIds";
 const sauce = "https://www.youtube.com/watch?v=uW6nkqUmnYU";
 const imout = "https://www.youtube.com/watch?v=5FjWe31S_0g";
@@ -31,18 +31,21 @@ const nice = "https://www.youtube.com/watch?v=PMbYzSLLbRE";
 const mandarin = "https://www.youtube.com/watch?v=-cYBOGo0ptk&feature=youtu.be";
 const crumpin = "https://www.youtube.com/watch?v=wPbaNQ7RKPM&feature=youtu.be";
 const spook2 = "https://www.youtube.com/watch?v=8ujGHnVCnM8";
-
+const timLjud = "https://www.youtube.com/watch?v=VKMw2it8dQY";
+const JuWUl = "https://www.youtube.com/watch?v=Pk1I8uEMrP8";
+const fucked = "https://www.youtube.com/watch?v=ptw2Cor2HQM&feature=youtu.be";
 
 const karlsson = "140204591521333248";
 const niklas = "214496518692929537";
 const botID = "423191655135313930";
+const tim = "232210408440725504";
 
 const barkerId = "635925591769612323";
 const barkerVoice = "423191655135313930";
 
 const cats = ["sadcat1.jpg", "sadcat2.png", "sadcat3.jpg", "sadcat4.jpg", "sadcat5.jpg", "sadcat6.jpg", "sadcat7.jpg", "sadcat8.jpg", "sadcat9.jpg", "sadcat10.jpg", "sadcat11.png"];
-const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump"];
-
+const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump", "!gay"];
+const julen = ["https://www.youtube.com/watch?v=MgIwLeASnkw&feature=youtu.be", "https://www.youtube.com/watch?v=yXQViqx6GMY&feature=youtu.be", "https://www.youtube.com/watch?v=2QDzwBy55Uk&feature=youtu.be"];
 // Initialize Discord Bot
 const bot = new Discord.Client();
 playing = false;
@@ -90,12 +93,16 @@ bot.on("ready", () => {
 				channel = bot.channels.get("613622941695082534")
 				playing = true;
 				soundplayer(march, channel);
-			} else if (msg.content === "!test") {
+			} else if (msg.content === "!afk") {
 				afking = true;
 				afkPlayer()
+			} else if (msg.content === "!yoo") {
+				channel = bot.channels.get("613622941695082534")
+				playing = true;
+				soundplayer(timLjud, channel);
 			}
 		} else {
-			if(list.includes(msg.content)) {
+			if(list.includes(msg.content) || msg.content === "!juwul") {
 				if(msg.member.voiceChannel === undefined) {
 					msg.reply("You are not in a channel, " + haddock());
 					return;
@@ -290,6 +297,25 @@ bot.on("ready", () => {
 					soundplayer(crumpin, channel);
 				}
 			}
+			else if (msg.content === "!juwul") {
+				if(playing) {
+					msg.reply("You hit jackpot, banhammer will hit.");
+				} else 
+				{
+					banhammer(msg);
+					playing = true;
+					soundplayer(JuWUl, channel);
+				}
+			}
+			else if (msg.content === "!jul") {
+				if(playing) {
+					msg.reply("Take it easy, christmas will come soon!");
+				} else {
+					playing = true;
+					soundplayer(songs(), channel);
+				
+				}
+			}
 		}
 		
 	});
@@ -303,9 +329,18 @@ bot.on("ready", () => {
 			} else {
 				checkWhenJoin(oldMember, newMember, kitchen);
 			}
+		} else if (user.id === tim) {
+			checkWhenJoin(oldMember, newMember, timLjud)
 		}
 	});
 });
+
+function banhammer(msg) {
+	guilden = msg.guild;
+	mars = guilden.fetchMember(niklas);
+	main_text.send("Grattis! Ni fann det hemliga julkommandot! Niklas är nu bannad och skulle uppskatta om han kunde inte vara det...");
+	mars.ban("De fann julkommandot...");
+}
 
 function checkWhenJoin(oldMember, newMember, video) {
 	if(newMember.voiceChannelID !== null && newMember.voiceChannelID !== undefined) {
@@ -507,10 +542,9 @@ function haddock() {
 
 }
 function songs() {
-	var song = ["https://www.youtube.com/watch?v=4T0aFnzYKmU", "https://www.youtube.com/watch?v=WkRc65qcdLI", "https://www.youtube.com/watch?v=ZxqYInBDwss", "https://www.youtube.com/watch?v=rUyKiCC8xB4", "https://www.youtube.com/watch?v=D2b6P-kg6_c"];
-	var rand = song[Math.floor(Math.random() * song.length)];
-	//return rand;
-	return "https://www.youtube.com/watch?v=zK_Cau7UUAo";
+	//var song = ["https://www.youtube.com/watch?v=4T0aFnzYKmU", "https://www.youtube.com/watch?v=WkRc65qcdLI", "https://www.youtube.com/watch?v=ZxqYInBDwss", "https://www.youtube.com/watch?v=rUyKiCC8xB4", "https://www.youtube.com/watch?v=D2b6P-kg6_c"];
+	var rand = julen[Math.floor(Math.random() * julen.length)];
+	return rand;
 }
 
 function spam(user) {
@@ -518,7 +552,7 @@ function spam(user) {
 	for(i = 0; i < 5; i++) {
 		var hadoque = haddock();
 		user.send("Sluta spela Realm Grinder, " + hadoque + "!");
-		console.log("Sade: " + hadoque);
+		//console.log("Sade: " + hadoque);
 	}
 }
 
