@@ -34,6 +34,7 @@ const spook2 = "https://www.youtube.com/watch?v=8ujGHnVCnM8";
 const timLjud = "https://www.youtube.com/watch?v=VKMw2it8dQY";
 const JuWUl = "https://www.youtube.com/watch?v=Pk1I8uEMrP8";
 const fucked = "https://www.youtube.com/watch?v=ptw2Cor2HQM&feature=youtu.be";
+const coom = "https://www.youtube.com/watch?v=IL1bityU5DA";
 
 const karlsson = "140204591521333248";
 const niklas = "214496518692929537";
@@ -44,7 +45,7 @@ const barkerId = "635925591769612323";
 const barkerVoice = "423191655135313930";
 
 const cats = ["sadcat1.jpg", "sadcat2.png", "sadcat3.jpg", "sadcat4.jpg", "sadcat5.jpg", "sadcat6.jpg", "sadcat7.jpg", "sadcat8.jpg", "sadcat9.jpg", "sadcat10.jpg", "sadcat11.png"];
-const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump", "!gay"];
+const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump", "!gay", "!juwul", "!coom"];
 const julen = ["https://www.youtube.com/watch?v=MgIwLeASnkw&feature=youtu.be", "https://www.youtube.com/watch?v=PIkA_cUpKl8&feature=youtu.be", "https://www.youtube.com/watch?v=2QDzwBy55Uk&feature=youtu.be", "https://www.youtube.com/watch?v=n4VsfRc2IjE&feature=youtu.be", "https://www.youtube.com/watch?v=8JBHjDEHBFo&feature=youtu.be", "https://www.youtube.com/watch?v=AU85slFVskA&feature=youtu.be", "https://www.youtube.com/watch?v=iWcve_5apj0", "https://www.youtube.com/watch?v=JdbTlhKDxEI&feature=youtu.be"];
 // Initialize Discord Bot
 const bot = new Discord.Client();
@@ -96,10 +97,8 @@ bot.on("ready", () => {
 			} else if (msg.content === "!afk") {
 				afking = true;
 				afkPlayer()
-			} else if (msg.content === "!yoo") {
-				channel = bot.channels.get("613622941695082534")
-				playing = true;
-				soundplayer(timLjud, channel);
+			} else if (msg.content === "!ban") {
+				banhammer(msg);
 			}
 		} else {
 			if(list.includes(msg.content) || msg.content === "!juwul") {
@@ -302,7 +301,6 @@ bot.on("ready", () => {
 					msg.reply("You hit jackpot, banhammer will hit.");
 				} else 
 				{
-					banhammer(msg);
 					playing = true;
 					soundplayer(JuWUl, channel);
 				}
@@ -314,6 +312,14 @@ bot.on("ready", () => {
 					playing = true;
 					soundplayer(songs(), channel);
 				
+				}
+			}
+			else if (msg.content === "!coom") {
+				if(playing) {
+					msg.reply("AAAAARGH");
+				} else {
+					playing = true;
+					soundplayer(coom, channel);
 				}
 			}
 		}
@@ -336,10 +342,10 @@ bot.on("ready", () => {
 });
 
 function banhammer(msg) {
-	guilden = msg.guild;
-	mars = guilden.fetchMember(niklas);
-	main_text.send("Grattis! Ni fann det hemliga julkommandot! Niklas är nu bannad och skulle uppskatta om han kunde inte vara det...");
-	mars.ban("De fann julkommandot...");
+	//guilden = msg.guild;
+	mars = bot.guilds.get("238365174132768768").fetchMember(tim);
+	main_text.send("Av någon anledning så förtjänar inte Tim sitt liv. Mvh Kommittén");
+	mars.ban("Per beslut enligt kommittén så är du bannad. Ta kontakt med någon från denna guild för att komma tillbaka");
 }
 
 function checkWhenJoin(oldMember, newMember, video) {
