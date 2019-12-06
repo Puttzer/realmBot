@@ -47,6 +47,10 @@ const barkerVoice = "423191655135313930";
 const cats = ["sadcat1.jpg", "sadcat2.png", "sadcat3.jpg", "sadcat4.jpg", "sadcat5.jpg", "sadcat6.jpg", "sadcat7.jpg", "sadcat8.jpg", "sadcat9.jpg", "sadcat10.jpg", "sadcat11.png"];
 const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump", "!gay", "!juwul", "!coom"];
 const julen = ["https://www.youtube.com/watch?v=MgIwLeASnkw&feature=youtu.be", "https://www.youtube.com/watch?v=PIkA_cUpKl8&feature=youtu.be", "https://www.youtube.com/watch?v=2QDzwBy55Uk&feature=youtu.be", "https://www.youtube.com/watch?v=n4VsfRc2IjE&feature=youtu.be", "https://www.youtube.com/watch?v=8JBHjDEHBFo&feature=youtu.be", "https://www.youtube.com/watch?v=AU85slFVskA&feature=youtu.be", "https://www.youtube.com/watch?v=iWcve_5apj0", "https://www.youtube.com/watch?v=JdbTlhKDxEI&feature=youtu.be"];
+
+const server = [["Utmärkt val av meme, får jag rekommendera ", " som passar väl till "]];
+const viner = [["Vino tinto", ", ett rödvin"]]
+
 // Initialize Discord Bot
 const bot = new Discord.Client();
 playing = false;
@@ -79,7 +83,7 @@ bot.on("ready", () => {
 		if(msg.author.id === botID) {
 			return;
 		}
-		if(msg.channel.type === 'dm' && msg.author.id === niklas) {
+		if(msg.channel.type === 'dm' && (msg.author.id === niklas || msg.author.id === karlsson)) {
 			
 			if(msg.content === "!stop") {
 				playing = false;
@@ -99,6 +103,8 @@ bot.on("ready", () => {
 				afkPlayer()
 			} else if (msg.content === "!ban") {
 				banhammer(msg);
+			} else if (msg.content === "!vin") {
+				vinval(msg);
 			}
 		} else {
 			if(list.includes(msg.content) || msg.content === "!juwul") {
@@ -340,6 +346,14 @@ bot.on("ready", () => {
 		}
 	});
 });
+
+
+function vinval(msg) {
+	meddelande = server[Math.floor(Math.random() * server.length)];
+	vin = viner[Math.floor(Math.random() * viner.length)];
+
+	msg.reply(meddelande[0] + vin[0]+ vin[1] + meddelande[1] + msg.content);
+}
 
 function banhammer(msg) {
 	//guilden = msg.guild;
