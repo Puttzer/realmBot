@@ -9,7 +9,7 @@ var dungeon;
 const price = "https://www.youtube.com/watch?v=G8iOmVd1W_g";
 const spook = "https://www.youtube.com/watch?v=eVrYbKBrI7o";
 const cheeki = "https://www.youtube.com/watch?v=JsWwMTuG4NA";
-const owo = "";
+const uwu = "https://www.youtube.com/watch?v=ptw2Cor2HQM&feature=youtu.be";
 const nuzzle = "https://www.youtube.com/watch?v=h6DNdop6pD8";
 const cummies = "https://www.youtube.com/watch?v=CxVDnpsGTZY";
 const huggies = "https://www.youtube.com/watch?v=I17QjIC6QJw&feature=youtu.be";
@@ -35,18 +35,20 @@ const timLjud = "https://www.youtube.com/watch?v=VKMw2it8dQY";
 const JuWUl = "https://www.youtube.com/watch?v=Pk1I8uEMrP8";
 const fucked = "https://www.youtube.com/watch?v=ptw2Cor2HQM&feature=youtu.be";
 const coom = "https://www.youtube.com/watch?v=IL1bityU5DA";
+const drill = "https://www.youtube.com/watch?v=zjnJk5V9nSM&feature=youtu.be";
 
 const karlsson = "140204591521333248";
 const niklas = "214496518692929537";
 const botID = "423191655135313930";
 const tim = "232210408440725504";
+const bomler = "169869738501996545";
 
 const barkerId = "635925591769612323";
 const barkerVoice = "423191655135313930";
 
 const cats = ["sadcat1.jpg", "sadcat2.png", "sadcat3.jpg", "sadcat4.jpg", "sadcat5.jpg", "sadcat6.jpg", "sadcat7.jpg", "sadcat8.jpg", "sadcat9.jpg", "sadcat10.jpg", "sadcat11.png"];
-const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump", "!gay", "!juwul", "!coom"];
-const julen = ["https://www.youtube.com/watch?v=MgIwLeASnkw&feature=youtu.be", "https://www.youtube.com/watch?v=PIkA_cUpKl8&feature=youtu.be", "https://www.youtube.com/watch?v=2QDzwBy55Uk&feature=youtu.be", "https://www.youtube.com/watch?v=n4VsfRc2IjE&feature=youtu.be", "https://www.youtube.com/watch?v=8JBHjDEHBFo&feature=youtu.be", "https://www.youtube.com/watch?v=AU85slFVskA&feature=youtu.be", "https://www.youtube.com/watch?v=iWcve_5apj0", "https://www.youtube.com/watch?v=JdbTlhKDxEI&feature=youtu.be"];
+const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump", "!gay", "!juwul", "!coom", "!uwu", "!shitdrill"];
+const julen = ["https://www.youtube.com/watch?v=zjnJk5V9nSM&feature=youtu.be", "https://www.youtube.com/watch?v=MgIwLeASnkw&feature=youtu.be", "https://www.youtube.com/watch?v=PIkA_cUpKl8&feature=youtu.be", "https://www.youtube.com/watch?v=2QDzwBy55Uk&feature=youtu.be", "https://www.youtube.com/watch?v=n4VsfRc2IjE&feature=youtu.be", "https://www.youtube.com/watch?v=8JBHjDEHBFo&feature=youtu.be", "https://www.youtube.com/watch?v=AU85slFVskA&feature=youtu.be", "https://www.youtube.com/watch?v=iWcve_5apj0", "https://www.youtube.com/watch?v=JdbTlhKDxEI&feature=youtu.be"];
 
 const server = [["Utmärkt val av meme, får jag rekommendera ", " som passar väl till "]];
 const viner = [["Vino tinto", ", ett rödvin"]]
@@ -328,6 +330,22 @@ bot.on("ready", () => {
 					soundplayer(coom, channel);
 				}
 			}
+			else if (msg.content === "!uwu") {
+				if(playing) {
+					msg.reply("This shit is so fuicked, I love it and it must be here. I'm drunk while making this");
+				} else {
+					playing = true;
+					soundplayer(uwu, channel);
+				}
+			}
+			else if(msg.content.toLowerCase() === "!shitdrill") {
+				if(playing) {
+					msg.reply("I can't play it, because of THIS SHIT DRILL");
+				} else {
+					playing = true;
+					soundplayer(drill, channel);
+				}
+			}
 		}
 		
 	});
@@ -357,9 +375,12 @@ function vinval(msg) {
 
 function banhammer(msg) {
 	//guilden = msg.guild;
-	mars = bot.guilds.get("238365174132768768").fetchMember(tim);
-	main_text.send("Av någon anledning så förtjänar inte Tim sitt liv. Mvh Kommittén");
-	mars.ban("Per beslut enligt kommittén så är du bannad. Ta kontakt med någon från denna guild för att komma tillbaka");
+	mars = bot.guilds.get("238365174132768768").fetchMember(bomler).then(member => {
+		member.kick("Per beslut enligt kommittén så är du bannad för att gå och lägga dig. Ta kontakt med någon från denna guild för att komma tillbaka. Mvh Kommittén");
+	})
+
+	//main_text.send("Av någon anledning så förtjänar inte Tim sitt liv. Mvh Kommittén");
+	//mars.ban("Per beslut enligt kommittén så är du bannad. Ta kontakt med någon från denna guild för att komma tillbaka");
 }
 
 function checkWhenJoin(oldMember, newMember, video) {
