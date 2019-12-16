@@ -94,7 +94,11 @@ bot.on("ready", () => {
 				if(player !== null) {
 					player.end();
 				}
-				playingChannel.leave();
+				try {
+					playingChannel.leave()
+				} catch (error) {
+					borkenCat();
+				}
 				player = null;
 			} else if(msg.content === "!march") {
 				channel = bot.channels.get("613622941695082534")
@@ -107,6 +111,8 @@ bot.on("ready", () => {
 				banhammer(msg);
 			} else if (msg.content === "!vin") {
 				vinval(msg);
+			} else if (msg.content === "!test") {
+				fetcher();
 			}
 		} else {
 			if(list.includes(msg.content) || msg.content === "!juwul") {
@@ -147,7 +153,11 @@ bot.on("ready", () => {
 				}
 				else if(playing) {
 					msg.channel.send({files: ['nutted.png']})
-					playingChannel.leave();
+					try {
+						playingChannel.leave()
+					} catch (error) {
+						borkenCat();
+					}
 					playing = false;
 				} else {
 					playing = false;
@@ -365,6 +375,10 @@ bot.on("ready", () => {
 	});
 });
 
+function fetcher() {
+	tmp = bot.fetchUser("169869738501996545");
+	console.log(tmp);
+}
 
 function vinval(msg) {
 	meddelande = server[Math.floor(Math.random() * server.length)];
