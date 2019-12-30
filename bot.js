@@ -47,7 +47,7 @@ const barkerId = "635925591769612323";
 const barkerVoice = "423191655135313930";
 
 const cats = ["sadcat1.jpg", "sadcat2.png", "sadcat3.jpg", "sadcat4.jpg", "sadcat5.jpg", "sadcat6.jpg", "sadcat7.jpg", "sadcat8.jpg", "sadcat9.jpg", "sadcat10.jpg", "sadcat11.png"];
-const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump", "!gay", "!juwul", "!coom", "!uwu", "!shitdrill"];
+const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump", "!gay", "!juwul", "!coom", "!uwu", "!shitdrill", "!play"];
 const julen = ["https://www.youtube.com/watch?v=zjnJk5V9nSM&feature=youtu.be", "https://www.youtube.com/watch?v=MgIwLeASnkw&feature=youtu.be", "https://www.youtube.com/watch?v=PIkA_cUpKl8&feature=youtu.be", "https://www.youtube.com/watch?v=2QDzwBy55Uk&feature=youtu.be", "https://www.youtube.com/watch?v=n4VsfRc2IjE&feature=youtu.be", "https://www.youtube.com/watch?v=8JBHjDEHBFo&feature=youtu.be", "https://www.youtube.com/watch?v=AU85slFVskA&feature=youtu.be", "https://www.youtube.com/watch?v=iWcve_5apj0", "https://www.youtube.com/watch?v=JdbTlhKDxEI&feature=youtu.be"];
 
 const server = [["Utmärkt val av meme, får jag rekommendera ", " som passar väl till "]];
@@ -60,6 +60,8 @@ playingChannel = null;
 player = null;
 wild = false;
 afking = false;
+
+queue = [];
 
 bot.on("ready", () => {
 	console.log("Skrothög startad");
@@ -86,7 +88,7 @@ bot.on("ready", () => {
 			return;
 		}
 		if(msg.channel.type === 'dm' && (msg.author.id === niklas || msg.author.id === karlsson)) {
-			
+			cmd = msg.content.split(" ");
 			if(msg.content === "!stop") {
 				playing = false;
 				wild = false;
@@ -97,11 +99,11 @@ bot.on("ready", () => {
 				try {
 					playingChannel.leave()
 				} catch (error) {
-					borkenCat();
+					borkencat(error);
 				}
 				player = null;
 			} else if(msg.content === "!march") {
-				channel = bot.channels.get("613622941695082534")
+				channel = bot.channels.get("613622941695082534");
 				playing = true;
 				soundplayer(march, channel);
 			} else if (msg.content === "!afk") {
@@ -112,10 +114,26 @@ bot.on("ready", () => {
 			} else if (msg.content === "!vin") {
 				vinval(msg);
 			} else if (msg.content === "!test") {
-				fetcher();
+				//fetcher();
+			} else if (cmd[0] === "!test") {
+				if(playing) {
+					if(cmd.length > 1) {
+						queue.push(cmd[1]);
+						//msg.channel.send("Added song from " + msg.author.username);
+						msg.reply("Added song from " + msg.author.username);
+					}
+					 
+				} else {
+					if(cmd.length > 1){
+						playing = true;
+						channel = bot.channels.get("613738899302383636")
+						soundplayer(cmd[1], channel)
+					}
+				}
 			}
 		} else {
-			if(list.includes(msg.content) || msg.content === "!juwul") {
+			cmd = msg.content.split(" ");
+			if(list.includes(msg.content) || list.includes(cmd[0])) {
 				if(msg.member.voiceChannel === undefined) {
 					msg.reply("You are not in a channel, " + haddock());
 					return;
@@ -156,7 +174,7 @@ bot.on("ready", () => {
 					try {
 						playingChannel.leave()
 					} catch (error) {
-						borkenCat();
+						borkencat(error);
 					}
 					playing = false;
 				} else {
@@ -355,6 +373,20 @@ bot.on("ready", () => {
 					playing = true;
 					soundplayer(drill, channel);
 				}
+			} else if (cmd[0] === "!play") {
+				if(playing) {
+					if(cmd.length > 1) {
+						queue.push(cmd[1]);
+						msg.channel.send("Added song from " + msg.author.username);
+					}
+					 
+				} else {
+					if(cmd.length > 1){
+						playing = true;
+						soundplayer(cmd[1], channel)
+					}
+				}
+
 			}
 		}
 		
@@ -374,6 +406,10 @@ bot.on("ready", () => {
 		}
 	});
 });
+
+function play() {
+
+}
 
 function fetcher() {
 	tmp = bot.fetchUser("169869738501996545");
@@ -421,7 +457,7 @@ function checkWhenJoin(oldMember, newMember, video) {
 /*
 		console.log("New command")
 		if((player === undefined || player === null) && playing) {
-			//borkenCat();
+			//borkencat(error);
 			console.log("In error section");
 			player = null;
 			playing = false;
@@ -454,10 +490,10 @@ function lewd(msg, reply) {
 		setTimeout(function() {
 		  resolve("slow");
 			msg.delete().catch(function() {
-				borkenCat();
+				borkencat(error);
 			});
 			reply.delete().catch(function() {
-				borkenCat();
+				borkencat(error);
 			});
 		}, 10000);
 	  });
@@ -471,7 +507,8 @@ function gestapo(msg) {
 	});
 }
 
-function borkenCat() {
+function borkencat(err) {
+	console.log(err);
 	main_text.send("You broke something =(");
 	var cat = cats[Math.floor(Math.random() * cats.length)];
 	main_text.send({files: [cat]});
@@ -509,7 +546,7 @@ function afkPlayer() {
 
 		dispatcher.on('error', e => {
 			// Catch any errors that may arise
-			borkenCat();
+			borkencat(error);
 			playingChannel = null;
 			dungeon.leave();
 			player = null;
@@ -518,7 +555,7 @@ function afkPlayer() {
 		});
 
 }).catch(function() {
-	borkenCat();
+	borkencat(error);
 })
 }
 
@@ -531,25 +568,38 @@ function soundplayer(video, channel, option) {
 		stream = ytdl(video);
 		streamOpt = option;
 		const dispatcher = connection.playStream(stream, streamOpt);
+		dispatcher.on('debug', () => {
+			console.log("DEBUG INFO")
+			console.log(info);
+		});
 
 		dispatcher.on('start', () => {
-			console.log("Started!")
+			console.log("Started!");
 			playa = channel.members.get(botID);
 			playingChannel = channel
 			player = dispatcher;
 		});
+		dispatcher.on('error', () => {
+			console.log("ERROR INFO");
+			console.log(error);
+		});
 		dispatcher.on('end', () => {
 			console.log("ended...")
-			playing = false;
 			wild = false;
-			playingChannel = null;
 			player = null;
-			channel.leave();
+
+			if(queue.length > 0 ) {
+				soundplayer(queue.shift(), playingChannel);
+			} else {
+				playing = false;
+				playingChannel = null;
+				channel.leave();
+			}
 		});
 
 		dispatcher.on('error', e => {
 			// Catch any errors that may arise
-			borkenCat();
+			borkencat(error);
 			playing = false;
 			wild = false;
 			playingChannel = null;
@@ -559,7 +609,7 @@ function soundplayer(video, channel, option) {
 		});
 
 }).catch(function() {
-	borkenCat();
+	borkencat(error);
 })
 }
 
