@@ -62,6 +62,7 @@ wild = false;
 afking = false;
 
 queue = [];
+usingQueue = false;
 
 bot.on("ready", () => {
 	console.log("Skrothög startad");
@@ -102,6 +103,7 @@ bot.on("ready", () => {
 					borkencat(error);
 				}
 				player = null;
+				queue = [];
 			} else if(msg.content === "!march") {
 				channel = bot.channels.get("613622941695082534");
 				playing = true;
@@ -376,15 +378,22 @@ bot.on("ready", () => {
 			} else if (cmd[0] === "!play") {
 				if(playing) {
 					if(cmd.length > 1) {
+						usingQueue = true;
 						queue.push(cmd[1]);
 						msg.channel.send("Added song from " + msg.author.username);
 					}
 					 
 				} else {
-					if(cmd.length > 1){
-						playing = true;
-						soundplayer(cmd[1], channel)
+					if(wildride) {
+						msg.reply("I promise there is no escape from Ms. GLaDOS ride");
+					} else {
+						if(cmd.length > 1){
+							usingQueue = true;
+							playing = true;
+							soundplayer(cmd[1], channel)
+						}
 					}
+
 				}
 
 			}
@@ -588,9 +597,10 @@ function soundplayer(video, channel, option) {
 			wild = false;
 			player = null;
 
-			if(queue.length > 0 ) {
+			if(queue.length > 0 && usingQueue) {
 				soundplayer(queue.shift(), playingChannel);
 			} else {
+				usingQueue = false;
 				playing = false;
 				playingChannel = null;
 				channel.leave();
@@ -604,7 +614,12 @@ function soundplayer(video, channel, option) {
 			wild = false;
 			playingChannel = null;
 			player = null;
-			channel.leave();
+			try {
+				channel.leave();
+			} catch (error) {
+				console.log("Could not disconnect from channel, probably disconnected already");
+			}
+			
 			console.log(e);
 		});
 
