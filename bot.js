@@ -62,6 +62,7 @@ wild = false;
 afking = false;
 
 queue = [];
+usingQueue = false;
 
 bot.on("guildMemberAdd", (member) => {
 	member.setNickname("Boomler");
@@ -107,6 +108,7 @@ bot.on("ready", () => {
 				}
 
 				player = null;
+				queue = [];
 			} else if(msg.content === "!march") {
 				channel = bot.channels.get("613622941695082534");
 				playing = true;
@@ -377,6 +379,7 @@ bot.on("ready", () => {
 				if(playing) {
 					if(cmd.length > 1) {
 						if(ytdl.validateURL(cmd[1])) {
+							usingQueue = true;
 							queue.push(cmd[1]);
 							msg.channel.send("Added song from " + msg.author.username);
 						}
@@ -386,10 +389,12 @@ bot.on("ready", () => {
 				} else {
 					if(cmd.length > 1){
 						if(ytdl.validateURL(cmd[1])) {
+							usingQueue = true;
 							playing = true;
 							soundplayer(cmd[1], channel)
 						}
 					}
+
 				}
 
 			}
@@ -598,9 +603,10 @@ function soundplayer(video, channel, option) {
 			wild = false;
 			player = null;
 
-			if(queue.length > 0 ) {
+			if(queue.length > 0 && usingQueue) {
 				soundplayer(queue.shift(), playingChannel);
 			} else {
+				usingQueue = false;
 				playing = false;
 				playingChannel = null;
 				channel.leave();
@@ -614,7 +620,12 @@ function soundplayer(video, channel, option) {
 			wild = false;
 			playingChannel = null;
 			player = null;
-			channel.leave();
+			try {
+				channel.leave();
+			} catch (error) {
+				console.log("Could not disconnect from channel, probably disconnected already");
+			}
+			
 			console.log(e);
 		});
 
