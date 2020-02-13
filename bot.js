@@ -34,7 +34,7 @@ const spook2 = "https://www.youtube.com/watch?v=8ujGHnVCnM8";
 const timLjud = "https://www.youtube.com/watch?v=VKMw2it8dQY";
 const JuWUl = "https://www.youtube.com/watch?v=Pk1I8uEMrP8";
 const fucked = "https://www.youtube.com/watch?v=ptw2Cor2HQM&feature=youtu.be";
-const coom = "https://www.youtube.com/watch?v=IL1bityU5DA";
+//const coom = "https://www.youtube.com/watch?v=IL1bityU5DA";
 const drill = "https://www.youtube.com/watch?v=zjnJk5V9nSM&feature=youtu.be";
 
 const karlsson = "140204591521333248";
@@ -63,6 +63,10 @@ afking = false;
 
 queue = [];
 
+bot.on("guildMemberAdd", (member) => {
+	member.setNickname("Boomler");
+})
+
 bot.on("ready", () => {
 	console.log("Skrothög startad");
 	bot.user.setPresence({
@@ -90,17 +94,18 @@ bot.on("ready", () => {
 		if(msg.channel.type === 'dm' && (msg.author.id === niklas || msg.author.id === karlsson)) {
 			cmd = msg.content.split(" ");
 			if(msg.content === "!stop") {
+				try {
+					playingChannel.leave()
+				} catch (error) {
+					borkencat(error);
+				}
 				playing = false;
 				wild = false;
 				afking = false;
 				if(player !== null) {
 					player.end();
 				}
-				try {
-					playingChannel.leave()
-				} catch (error) {
-					borkencat(error);
-				}
+
 				player = null;
 			} else if(msg.content === "!march") {
 				channel = bot.channels.get("613622941695082534");
@@ -170,13 +175,13 @@ bot.on("ready", () => {
 					msg.reply(" wants to get off Mrs. GLaDOS wild ride!");
 				}
 				else if(playing) {
-					msg.channel.send({files: ['nutted.png']})
+					//msg.channel.send({files: ['nutted.png']})
 					try {
-						playingChannel.leave()
+						player.end();
 					} catch (error) {
 						borkencat(error);
 					}
-					playing = false;
+					//playing = false;
 				} else {
 					playing = false;
 					msg.reply("Can't nut if I haven't started");
@@ -351,12 +356,7 @@ bot.on("ready", () => {
 				}
 			}
 			else if (msg.content === "!coom") {
-				if(playing) {
-					msg.reply("AAAAARGH");
-				} else {
-					playing = true;
-					soundplayer(coom, channel);
-				}
+				msg.reply("RIP coom");
 			}
 			else if (msg.content === "!uwu") {
 				if(playing) {
@@ -376,21 +376,26 @@ bot.on("ready", () => {
 			} else if (cmd[0] === "!play") {
 				if(playing) {
 					if(cmd.length > 1) {
-						queue.push(cmd[1]);
-						msg.channel.send("Added song from " + msg.author.username);
+						if(ytdl.validateURL(cmd[1])) {
+							queue.push(cmd[1]);
+							msg.channel.send("Added song from " + msg.author.username);
+						}
+
 					}
 					 
 				} else {
 					if(cmd.length > 1){
-						playing = true;
-						soundplayer(cmd[1], channel)
+						if(ytdl.validateURL(cmd[1])) {
+							playing = true;
+							soundplayer(cmd[1], channel)
+						}
 					}
 				}
 
 			}
 		}
 		
-	});
+	})
 	//For playing certain things when certain people join
 	bot.on('voiceStateUpdate', (oldMember, newMember) => {
 		//console.log(oldMember);
@@ -565,10 +570,15 @@ function soundplayer(video, channel, option) {
 		player.end();
 	}
 	channel.join().then(connection => {
-		stream = ytdl(video);
+		stream = ytdl(video, { debug: true });
 		streamOpt = option;
 		const dispatcher = connection.playStream(stream, streamOpt);
-		dispatcher.on('debug', () => {
+
+		dispatcher.on('response', (response) => {
+			console.log("RESPONSE: ");
+			console.log(response);
+		})
+		dispatcher.on('debug', (info) => {
 			console.log("DEBUG INFO")
 			console.log(info);
 		});
@@ -608,8 +618,6 @@ function soundplayer(video, channel, option) {
 			console.log(e);
 		});
 
-}).catch(function() {
-	borkencat(error);
 })
 }
 
