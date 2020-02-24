@@ -47,7 +47,7 @@ const barkerId = "635925591769612323";
 const barkerVoice = "423191655135313930";
 
 const cats = ["sadcat1.jpg", "sadcat2.png", "sadcat3.jpg", "sadcat4.jpg", "sadcat5.jpg", "sadcat6.jpg", "sadcat7.jpg", "sadcat8.jpg", "sadcat9.jpg", "sadcat10.jpg", "sadcat11.png"];
-const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump", "!gay", "!juwul", "!coom", "!uwu", "!shitdrill", "!play"];
+const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump", "!gay", "!juwul", "!coom", "!uwu", "!shitdrill", "!play", "!flås"];
 const julen = ["https://www.youtube.com/watch?v=zjnJk5V9nSM&feature=youtu.be", "https://www.youtube.com/watch?v=MgIwLeASnkw&feature=youtu.be", "https://www.youtube.com/watch?v=PIkA_cUpKl8&feature=youtu.be", "https://www.youtube.com/watch?v=2QDzwBy55Uk&feature=youtu.be", "https://www.youtube.com/watch?v=n4VsfRc2IjE&feature=youtu.be", "https://www.youtube.com/watch?v=8JBHjDEHBFo&feature=youtu.be", "https://www.youtube.com/watch?v=AU85slFVskA&feature=youtu.be", "https://www.youtube.com/watch?v=iWcve_5apj0", "https://www.youtube.com/watch?v=JdbTlhKDxEI&feature=youtu.be"];
 
 const server = [["Utmärkt val av meme, får jag rekommendera ", " som passar väl till "]];
@@ -60,6 +60,7 @@ playingChannel = null;
 player = null;
 wild = false;
 afking = false;
+avflås = false;
 
 queue = [];
 usingQueue = false;
@@ -116,6 +117,28 @@ bot.on("ready", () => {
 			} else if (msg.content === "!afk") {
 				afking = true;
 				afkPlayer()
+			} else if (msg.content === "!mute") {
+				mars = bot.guilds.get("238365174132768768").fetchMember(niklas).then(member => {
+					member.setDeaf(false);
+					member.setMute(false);
+				})
+			}
+			else if (msg.content === "!flås") {
+				mars = bot.guilds.get("238365174132768768").fetchMember(bomler).then(member => {
+					member.setMute(true);
+					member.send("Du flåsade");
+					avflås = true;
+					setTimeout(() => {
+						mars = bot.guilds.get("238365174132768768").fetchMember(bomler).then(member => {
+							member.setMute(false);
+							avflås = false;
+						})
+
+					} , 15000);
+				}).catch(function () {
+					borkencat();
+				});
+			
 			} else if (msg.content === "!ban") {
 				banhammer(msg);
 			} else if (msg.content === "!vin") {
@@ -368,6 +391,34 @@ bot.on("ready", () => {
 					soundplayer(uwu, channel);
 				}
 			}
+			else if (msg.content === "!flås") {
+				mars = bot.guilds.get("238365174132768768").fetchMember(bomler).then(member => {
+					if(avflås) {
+						msg.reply("Inga ledsna katter här, hörru!")
+					} else {
+						member.setMute(true);
+						member.send("Du flåsade");
+						avflås = true;
+						setTimeout(() => {
+							mars = bot.guilds.get("238365174132768768").fetchMember(bomler).then(member => {
+								member.setMute(false);
+								avflås = false;
+							}).catch(function() {
+								borkencat()
+								console.log("Kunde inte avflåsa Bomler")
+								avflås = false;
+							})
+	
+						} , 7000);
+					}
+
+				}).catch(function() {
+					borkencat()
+					console.log("Kunde inte hitta bomler")
+					avflås = false;
+				})
+			
+			}
 			else if(msg.content.toLowerCase() === "!shitdrill") {
 				if(playing) {
 					msg.reply("I can't play it, because of THIS SHIT DRILL");
@@ -417,10 +468,6 @@ bot.on("ready", () => {
 	});
 });
 
-function play() {
-
-}
-
 function fetcher() {
 	tmp = bot.fetchUser("169869738501996545");
 	console.log(tmp);
@@ -438,10 +485,9 @@ function banhammer(msg) {
 	mars = bot.guilds.get("238365174132768768").fetchMember(bomler).then(member => {
 		member.kick("Per beslut enligt kommittén så är du bannad för att gå och lägga dig. Ta kontakt med någon från denna guild för att komma tillbaka. Mvh Kommittén");
 	})
-
+}
 	//main_text.send("Av någon anledning så förtjänar inte Tim sitt liv. Mvh Kommittén");
 	//mars.ban("Per beslut enligt kommittén så är du bannad. Ta kontakt med någon från denna guild för att komma tillbaka");
-}
 
 function checkWhenJoin(oldMember, newMember, video) {
 	if(newMember.voiceChannelID !== null && newMember.voiceChannelID !== undefined) {
