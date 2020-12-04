@@ -36,6 +36,7 @@ const JuWUl = "https://www.youtube.com/watch?v=Pk1I8uEMrP8";
 const fucked = "https://www.youtube.com/watch?v=ptw2Cor2HQM&feature=youtu.be";
 //const coom = "https://www.youtube.com/watch?v=IL1bityU5DA";
 const drill = "https://www.youtube.com/watch?v=zjnJk5V9nSM&feature=youtu.be";
+const viktor_video = "https://www.youtube.com/watch?v=2Bjy5YQ5xPc";
 const inga = "inga.mp3";
 const carrahagerLjud = "https://www.youtube.com/watch?v=0NoTdUy_vhM&feature=youtu.be";
 const kittenLjud = "https://www.youtube.com/watch?v=zFjkteBnYHw";
@@ -489,6 +490,14 @@ bot.on("ready", () => {
 					playing = true;
 					vinval(msg);
 					mp3Player(inga, channel);
+				}
+
+			}
+			else if (msg.content.toLowerCase() === "!viktor") {
+				msg.reply("\"If a machine is expected to be infallible, it cannot also be intelligent\" - Alan Turing");
+				if(!playing) {
+					playing = true
+					soundplayer(viktor_video, channel);
 				}
 
 			}
