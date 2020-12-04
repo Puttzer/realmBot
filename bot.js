@@ -37,6 +37,7 @@ const fucked = "https://www.youtube.com/watch?v=ptw2Cor2HQM&feature=youtu.be";
 //const coom = "https://www.youtube.com/watch?v=IL1bityU5DA";
 const drill = "https://www.youtube.com/watch?v=zjnJk5V9nSM&feature=youtu.be";
 const viktor_video = "https://www.youtube.com/watch?v=2Bjy5YQ5xPc";
+const carrahager_video = "https://www.youtube.com/watch?v=ZeDTeMjVc18";
 const inga = "inga.mp3";
 
 const emmaLjud = "https://www.youtube.com/watch?v=Gb2jGy76v0Y";
@@ -486,6 +487,14 @@ bot.on("ready", () => {
 					soundplayer(viktor_video, channel);
 				}
 
+			}
+			else if (msg.content.toLowerCase() === "!carrhager") {
+				
+				msg.reply(""Ska is long before reggae, you know ska came before reggae, But you know reggae came from ska\" - Bruce Greene");
+				if(!playing) {
+					playing = true
+					soundplayer(carrhager_video, channel);
+				}
 			}
 			else if (cmd[0] === "!play") {
 				if(playing) {
