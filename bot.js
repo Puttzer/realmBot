@@ -507,8 +507,8 @@ bot.on("ready", () => {
 				}
 			}
 			else if (msg.content.toLowerCase() === "!karlsson") {
-				msg.reply("\" Någon annan sprutar på mig just nu \;\)\"" - Niklas Granberg");
-				msg.reply("\"Älskar sperma på mig!!!! cummies\"" - Niklas Granberg");
+				msg.reply("\" Någon annan sprutar på mig just nu \;\)\" - Niklas Granberg");
+				msg.reply("\"Älskar sperma på mig!!!! cummies\" - Niklas Granberg");
 				if(!playing) {
 					playing = true
 					soundplayer(karlsson_video, channel);
