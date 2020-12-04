@@ -514,8 +514,21 @@ bot.on("ready", () => {
 					soundplayer(karlsson_video, channel);
 				}
 			}
-			else if (msg.content === "!8===D") { // TODO: add dynamic dick length
-				msg.reply("8===D-------"); //TODO: add dynamic cum
+			else if (msg.content[1] === "8" && msg.content[msg.content.length-1] === "D") { // TODO: add dynamic dick length
+				//msg.reply("8===D-------"); //TODO: add dynamic cum
+				kuk = true
+				i = 0;
+				for(i = 2; i<msg.content.length-1; i++) {
+					if(msg.content[i] !== "=") {
+						msg.reply("Det där var ingen kuk!")
+						kuk = false
+						break
+					}
+				}
+				if(kuk) {
+					//msg.reply("I:" + i + "   Pow: " + Math.pow(i, 2))
+					msg.reply("8" + "=".repeat(i-2) + "D" + "-".repeat(Math.pow(i-2, 2)))
+				}
 			}
 			else if (cmd[0] === "!play") {
 				if(playing) {
