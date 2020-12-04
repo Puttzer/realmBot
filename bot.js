@@ -504,6 +504,9 @@ bot.on("ready", () => {
 					soundplayer(karlsson_video, channel);
 				}
 			}
+			else if (msg.content === "!8===D") { // TODO: add dynamic dick length
+				msg.reply("8===D-------"); //TODO: add dynamic cum
+			}
 			else if (cmd[0] === "!play") {
 				if(playing) {
 					if(cmd.length > 1) {
