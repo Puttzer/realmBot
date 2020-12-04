@@ -7,6 +7,7 @@ This bot is made for a private discord. Basically a meme-machine. Please do not 
 *Brought to you buy a friendly neighbourhood carragher*
 
 
+```
 -	!nutted
 -	!cum
 -	!spook
@@ -34,7 +35,7 @@ This bot is made for a private discord. Basically a meme-machine. Please do not 
 -	!play
 -	!flås
 -	!inga
-
+```
 
 
 ```
