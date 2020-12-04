@@ -4,7 +4,7 @@ This bot is made for a private discord. Basically a meme-machine. Please do not 
 
 # Listade commands for botten för att niklas orkar inte ;)
 
-- *Brought to you buy a friendly neighbourhood carragher*
+*Brought to you buy a friendly neighbourhood carragher*
 
 
 -	!nutted
