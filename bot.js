@@ -37,6 +37,9 @@ const fucked = "https://www.youtube.com/watch?v=ptw2Cor2HQM&feature=youtu.be";
 //const coom = "https://www.youtube.com/watch?v=IL1bityU5DA";
 const drill = "https://www.youtube.com/watch?v=zjnJk5V9nSM&feature=youtu.be";
 const inga = "inga.mp3";
+const carrahagerLjud = "https://www.youtube.com/watch?v=0NoTdUy_vhM&feature=youtu.be";
+const kittenLjud = "https://www.youtube.com/watch?v=zFjkteBnYHw";
+const simpanLjud = "https://www.youtube.com/watch?v=2EeW_XhpS2Q";
 
 const emmaLjud = "https://www.youtube.com/watch?v=Gb2jGy76v0Y";
 const loweLjud = "https://www.youtube.com/watch?v=FecMobXqomM";
@@ -52,12 +55,14 @@ const emma = "513052761194233866";
 const lowe = "174063444109033472";
 const MP = "260786692493934593";
 const carrahager = "109009038368350208";
+const kitten = "320120716760449025";
+const simpan = "238257602499313664";
 
 const barkerId = "635925591769612323";
 const barkerVoice = "423191655135313930";
 
 const cats = ["sadcat1.jpg", "sadcat2.png", "sadcat3.jpg", "sadcat4.jpg", "sadcat5.jpg", "sadcat6.jpg", "sadcat7.jpg", "sadcat8.jpg", "sadcat9.jpg", "sadcat10.jpg", "sadcat11.png"];
-const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump", "!gay", "!juwul", "!coom", "!uwu", "!shitdrill", "!play", "!flås", "inga"];
+const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump", "!gay", "!juwul", "!coom", "!uwu", "!shitdrill", "!play", "!flås", "!inga"];
 const julen = ["https://www.youtube.com/watch?v=zjnJk5V9nSM&feature=youtu.be", "https://www.youtube.com/watch?v=MgIwLeASnkw&feature=youtu.be", "https://www.youtube.com/watch?v=PIkA_cUpKl8&feature=youtu.be", "https://www.youtube.com/watch?v=2QDzwBy55Uk&feature=youtu.be", "https://www.youtube.com/watch?v=n4VsfRc2IjE&feature=youtu.be", "https://www.youtube.com/watch?v=8JBHjDEHBFo&feature=youtu.be", "https://www.youtube.com/watch?v=AU85slFVskA&feature=youtu.be", "https://www.youtube.com/watch?v=iWcve_5apj0", "https://www.youtube.com/watch?v=JdbTlhKDxEI&feature=youtu.be"];
 
 const server = [["Utmärkt val av memé, får jag rekommendera ", " som passar väl till "], ["Till denna memé vill jag föreslå ", ", det bör passa till "], ["Ypperligt val, ", ", bör fungera alldeles utmärkt till "]];
@@ -71,6 +76,8 @@ player = null;
 wild = false;
 afking = false;
 avflås = false;
+
+latestMessage = {id:0};
 
 queue = [];
 usingQueue = false;
@@ -103,7 +110,7 @@ bot.on("ready", () => {
 		if(msg.author.id === botID) {
 			return;
 		}
-		logdata = "MSG: " + msg.author.username + " wrote: " + msg.content;
+		logdata = "MSG: " + msg.author.username + " wrote: " + msg.content + ", ID: " + msg.id;
 		console.log(logdata);
 		if(msg.channel.type === 'dm' && (msg.author.id === niklas || msg.author.id === karlsson)) {
 			cmd = msg.content.split(" ");
@@ -174,6 +181,12 @@ bot.on("ready", () => {
 				}
 			}
 		} else {
+			if(msg.id !== latestMessage.id){
+				latestMessage = msg;
+			} else {
+				console.log("Det hände igen: ID " + msg.id);
+				return;
+			}
 			cmd = msg.content.split(" ");
 			if(list.includes(msg.content) || list.includes(cmd[0])) {
 				if(msg.member.voiceChannel === undefined) {
@@ -307,6 +320,7 @@ bot.on("ready", () => {
 				} else {
 					playing = true;
 					vinval(msg);
+					latestMessage = msg;
 					if(wildride()) {
 						soundplayer(seindfeldRape, channel);
 					} else {
@@ -526,7 +540,11 @@ bot.on("ready", () => {
 		} else if (user.id === bomler) {
 			checkWhenJoin(oldMember, newMember, bomlerLjud);
 		} else if (user.id === carrahager) {
-			//checkWhenJoin(oldMember, newMember, inga);
+			checkWhenJoin(oldMember, newMember, carrahagerLjud);
+		} else if (user.id === kitten) {
+			checkWhenJoin(oldMember, newMember, kittenLjud);
+		} else if (user.id === simpan) {
+			checkWhenJoin(oldMember, newMember, simpanLjud);
 		}
 	});
 });
