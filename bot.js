@@ -159,7 +159,7 @@ bot.on("ready", () => {
 				}).catch(function () {
 					borkencat();
 				});
-			
+
 			} else if (msg.content === "!ban") {
 				banhammer(msg);
 			} else if (msg.content === "!vin") {
@@ -173,7 +173,7 @@ bot.on("ready", () => {
 						//msg.channel.send("Added song from " + msg.author.username);
 						msg.reply("Added song from " + msg.author.username);
 					}
-					 
+
 				} else {
 					if(cmd.length > 1){
 						playing = true;
@@ -214,7 +214,7 @@ bot.on("ready", () => {
 					soundplayer(price, channel);
 					vinval(msg);
 				}
-	
+
 			}
 			else if(msg.content === "!huggies") {
 				if(playing) {
@@ -255,7 +255,7 @@ bot.on("ready", () => {
 					} else {
 						soundplayer(spook , channel);
 					}
-					
+
 				}
 			}
 			else if(msg.content === "!blyat") {
@@ -311,7 +311,7 @@ bot.on("ready", () => {
 						soundplayer(portal, channel);
 				}
 			}
-	
+
 			}
 			else if (msg.content === "!kittn") {
 				msg.channel.send("Benjicanine: @Razorkittn I don't think you know the definition of yiff");
@@ -381,7 +381,7 @@ bot.on("ready", () => {
 					vinval(msg);
 					soundplayer(succ, channel);
 				}
-			} 
+			}
 			else if (msg.content === "!nice") {
 				if(playing) {
 					msg.reply("This is not noice");
@@ -390,7 +390,7 @@ bot.on("ready", () => {
 					vinval(msg);
 					soundplayer(nice, channel);
 				}
-			} 
+			}
 			else if (msg.content === "!mandarin") {
 				if(playing) {
 					msg.reply("\*slurping sounds\*");
@@ -399,11 +399,11 @@ bot.on("ready", () => {
 					vinval(msg);
 					soundplayer(mandarin, channel);
 				}
-			} 
+			}
 			else if (msg.content === "!crump") {
 				if(playing) {
 					msg.reply("Don't worry dear, I will crump with you soon");
-				} else 
+				} else
 				{
 					playing = true;
 					vinval(msg);
@@ -413,7 +413,7 @@ bot.on("ready", () => {
 			else if (msg.content === "!juwul") {
 				if(playing) {
 					msg.reply("You hit jackpot, banhammer will hit.");
-				} else 
+				} else
 				{
 					playing = true;
 					vinval(msg);
@@ -427,7 +427,7 @@ bot.on("ready", () => {
 					playing = true;
 					vinval(msg);
 					soundplayer(songs(), channel);
-				
+
 				}
 			}
 			else if (msg.content === "!coom") {
@@ -464,7 +464,7 @@ bot.on("ready", () => {
 								console.log("Kunde inte avflåsa Bomler")
 								avflås = false;
 							})
-	
+
 						} , 7000);
 					}
 
@@ -473,7 +473,7 @@ bot.on("ready", () => {
 					console.log("Kunde inte hitta bomler")
 					avflås = false;
 				})
-			
+
 			}
 			else if(msg.content.toLowerCase() === "!shitdrill") {
 				if(playing) {
@@ -503,11 +503,11 @@ bot.on("ready", () => {
 
 			}
 			else if (msg.content.toLowerCase() === "!carrhager") {
-				
-				msg.reply(""Ska is long before reggae, you know ska came before reggae, But you know reggae came from ska\" - Bruce Greene");
+
+				msg.reply("\"Ska is long before reggae, you know ska came before reggae, But you know reggae came from ska\" - Bruce Greene");
 				if(!playing) {
 					playing = true
-					soundplayer(carrhager_video, channel);
+					soundplayer(carrahager_video, channel);
 				}
 			}
 			else if (cmd[0] === "!play") {
@@ -520,7 +520,7 @@ bot.on("ready", () => {
 						}
 
 					}
-					 
+
 				} else {
 					if(cmd.length > 1){
 						if(ytdl.validateURL(cmd[1])) {
@@ -535,7 +535,7 @@ bot.on("ready", () => {
 
 			}
 		}
-		
+
 	})
 	//For playing certain things when certain people join
 	bot.on('voiceStateUpdate', (oldMember, newMember) => {
@@ -580,7 +580,7 @@ function vinval(msg) {
 	} else {
 		msg.reply(meddelande[0] + vin + meddelande[1] + msg.content);
 	}
-	
+
 }
 
 function banhammer(msg) {
@@ -603,11 +603,11 @@ function checkWhenJoin(oldMember, newMember, video) {
 				} else {
 					soundplayer(video, newMember.voiceChannel);
 				}
-				
+
 			}
 		} else {
 			//User was not in a channel before on this server.
-			//or has been on this server earlier without disconnecting in between. 
+			//or has been on this server earlier without disconnecting in between.
 			if(oldMember.voiceChannelID === null) {
 				if(!playing) {
 					playing = true;
@@ -783,7 +783,7 @@ function mp3Player(video, channel, option) {
 			} catch (error) {
 				console.log("Could not disconnect from channel, probably disconnected already");
 			}
-			
+
 			console.log(e);
 		});
 
@@ -846,7 +846,7 @@ function soundplayer(video, channel, option) {
 			} catch (error) {
 				console.log("Could not disconnect from channel, probably disconnected already");
 			}
-			
+
 			console.log(e);
 		});
 
