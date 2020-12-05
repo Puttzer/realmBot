@@ -34,6 +34,7 @@ const spook2 = "https://www.youtube.com/watch?v=8ujGHnVCnM8";
 const timLjud = "https://www.youtube.com/watch?v=VKMw2it8dQY";
 const JuWUl = "https://www.youtube.com/watch?v=Pk1I8uEMrP8";
 const fucked = "https://www.youtube.com/watch?v=ptw2Cor2HQM&feature=youtu.be";
+const effin_with_some_wet_ass_pword = "https://www.youtube.com/watch?v=jWsx2iqO1ks";
 //const coom = "https://www.youtube.com/watch?v=IL1bityU5DA";
 const drill = "https://www.youtube.com/watch?v=zjnJk5V9nSM&feature=youtu.be";
 const viktor_video = "https://www.youtube.com/watch?v=2Bjy5YQ5xPc";
@@ -60,6 +61,7 @@ const MP = "260786692493934593";
 const carrahager = "109009038368350208";
 const kitten = "320120716760449025";
 const simpan = "238257602499313664";
+const viktor = "153459058823790592";
 
 const barkerId = "635925591769612323";
 const barkerVoice = "423191655135313930";
@@ -527,7 +529,24 @@ bot.on("ready", () => {
 				}
 				if(kuk) {
 					//msg.reply("I:" + i + "   Pow: " + Math.pow(i, 2))
-					msg.reply("8" + "=".repeat(i-2) + "D" + "-".repeat(Math.pow(i-2, 2)))
+					if (message.author.id === niklas || message.author.id === viktor) {
+						msg.reply("8" + "=".repeat(i-2) + "D" + "-".repeat(Math.pow(i-2, 3)));
+					} else if ((message.author.id === bomler || message.author.id === karlsson) && (i-2 > 2)){
+						msg.reply("ERROR : [exception raised dickOutOfBoundsException]\nAnvändare överskrider sin egen medfödda storlek. Välj en kortare längd och testa igen.");
+					} else if ((message.author.id === tim) && (i-2 < 2)){
+						msg.reply("ERROR : [exception raised dickOutOfBoundsException]\nAnvändare underskrider sin egen medfödda storlek. Välj en större längd och testa igen.");
+					} else {
+						if (message.author.id === emma) {
+							msg.reply("Inte visste jag... :O");
+						}
+						msg.reply("8" + "=".repeat(i-2) + "D" + "-".repeat(Math.pow(i-2, 2)));
+					}
+				}
+			} else if (msg.content.toLowerCase() === "!wap" || msg.content.toLowerCase() === "!shapiro") {
+				msg.reply("So let's say, hypothetically, for the sake of argument, there are some whores in this house. Also, let's say that these whores have wet ass p-words. Then they claim to make the \"pull out game weak.\" Okay first of all \"pull out game\" is a logical fallacy because the act of pulling out was never intended to be any sort of leisurely activity, okay. You can not reasonably keep score when the act of pulling out is being performed. Okay the idea that pulling out has anything to do with what would be considered a \"game,\" is entirely preposterous, okay. Secondly, what about having \"wet ass p-words\" would actually cause the contrived game of \"pulling out\" to be weak? Again there is no evidence for this. There are no studies proving this. Okay these claims are just created out of thin air and just readily accepted by the people on the left before any actual proof can be shown. This is a constant issue in our society and its perpetrated by those on the radical, hypersexual left, okay. Furthermore, about the whores in said house. Where is this house? Who owns it? Okay these are things that have not, and most likely cannot be answered. Okay It seems to me, that this woman who calls herself \"Cardi-B\" has a serious uphill battle if she wants to be taken seriously, by anyone with a modicum of civility. Okay.");
+				if(!playing) {
+					playing = true
+					soundplayer(effin_with_some_wet_ass_pword, channel);
 				}
 			}
 			else if (cmd[0] === "!play") {
