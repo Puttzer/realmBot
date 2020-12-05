@@ -40,6 +40,9 @@ const viktor_video = "https://www.youtube.com/watch?v=2Bjy5YQ5xPc";
 const carragher_video= "https://www.youtube.com/watch?v=ZeDTeMjVc18";
 const karlsson_video = "https://www.youtube.com/watch?v=W8kwT0QFAU4";
 const inga = "inga.mp3";
+const carrahagerLjud = "https://www.youtube.com/watch?v=0NoTdUy_vhM&feature=youtu.be";
+const kittenLjud = "https://www.youtube.com/watch?v=zFjkteBnYHw";
+const simpanLjud = "https://www.youtube.com/watch?v=2EeW_XhpS2Q";
 
 const emmaLjud = "https://www.youtube.com/watch?v=Gb2jGy76v0Y";
 const loweLjud = "https://www.youtube.com/watch?v=FecMobXqomM";
@@ -55,12 +58,14 @@ const emma = "513052761194233866";
 const lowe = "174063444109033472";
 const MP = "260786692493934593";
 const carrahager = "109009038368350208";
+const kitten = "320120716760449025";
+const simpan = "238257602499313664";
 
 const barkerId = "635925591769612323";
 const barkerVoice = "423191655135313930";
 
 const cats = ["sadcat1.jpg", "sadcat2.png", "sadcat3.jpg", "sadcat4.jpg", "sadcat5.jpg", "sadcat6.jpg", "sadcat7.jpg", "sadcat8.jpg", "sadcat9.jpg", "sadcat10.jpg", "sadcat11.png"];
-const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump", "!gay", "!juwul", "!coom", "!uwu", "!shitdrill", "!play", "!flås", "inga"];
+const list = ["!nutted", "!cum", "!spook", "!blyat", "!huggies", "!owo", "!cummies", "!boi", "!radio", "!kittn", "!seinfeld", "!curb", "!fuck", "!retarded", "!cummotion", "!succ", "!nice", "!mandarin", "!crump", "!gay", "!juwul", "!coom", "!uwu", "!shitdrill", "!play", "!flås", "!inga"];
 const julen = ["https://www.youtube.com/watch?v=zjnJk5V9nSM&feature=youtu.be", "https://www.youtube.com/watch?v=MgIwLeASnkw&feature=youtu.be", "https://www.youtube.com/watch?v=PIkA_cUpKl8&feature=youtu.be", "https://www.youtube.com/watch?v=2QDzwBy55Uk&feature=youtu.be", "https://www.youtube.com/watch?v=n4VsfRc2IjE&feature=youtu.be", "https://www.youtube.com/watch?v=8JBHjDEHBFo&feature=youtu.be", "https://www.youtube.com/watch?v=AU85slFVskA&feature=youtu.be", "https://www.youtube.com/watch?v=iWcve_5apj0", "https://www.youtube.com/watch?v=JdbTlhKDxEI&feature=youtu.be"];
 
 const server = [["Utmärkt val av memé, får jag rekommendera ", " som passar väl till "], ["Till denna memé vill jag föreslå ", ", det bör passa till "], ["Ypperligt val, ", ", bör fungera alldeles utmärkt till "]];
@@ -74,6 +79,8 @@ player = null;
 wild = false;
 afking = false;
 avflås = false;
+
+latestMessage = {id:0};
 
 queue = [];
 usingQueue = false;
@@ -106,7 +113,7 @@ bot.on("ready", () => {
 		if(msg.author.id === botID) {
 			return;
 		}
-		logdata = "MSG: " + msg.author.username + " wrote: " + msg.content;
+		logdata = "MSG: " + msg.author.username + " wrote: " + msg.content + ", ID: " + msg.id;
 		console.log(logdata);
 		if(msg.channel.type === 'dm' && (msg.author.id === niklas || msg.author.id === karlsson)) {
 			cmd = msg.content.split(" ");
@@ -153,7 +160,7 @@ bot.on("ready", () => {
 				}).catch(function () {
 					borkencat();
 				});
-			
+
 			} else if (msg.content === "!ban") {
 				banhammer(msg);
 			} else if (msg.content === "!vin") {
@@ -167,7 +174,7 @@ bot.on("ready", () => {
 						//msg.channel.send("Added song from " + msg.author.username);
 						msg.reply("Added song from " + msg.author.username);
 					}
-					 
+
 				} else {
 					if(cmd.length > 1){
 						playing = true;
@@ -177,6 +184,12 @@ bot.on("ready", () => {
 				}
 			}
 		} else {
+			if(msg.id !== latestMessage.id){
+				latestMessage = msg;
+			} else {
+				console.log("Det hände igen: ID " + msg.id);
+				return;
+			}
 			cmd = msg.content.split(" ");
 			if(list.includes(msg.content) || list.includes(cmd[0])) {
 				if(msg.member.voiceChannel === undefined) {
@@ -202,7 +215,7 @@ bot.on("ready", () => {
 					soundplayer(price, channel);
 					vinval(msg);
 				}
-	
+
 			}
 			else if(msg.content === "!huggies") {
 				if(playing) {
@@ -243,7 +256,7 @@ bot.on("ready", () => {
 					} else {
 						soundplayer(spook , channel);
 					}
-					
+
 				}
 			}
 			else if(msg.content === "!blyat") {
@@ -299,7 +312,7 @@ bot.on("ready", () => {
 						soundplayer(portal, channel);
 				}
 			}
-	
+
 			}
 			else if (msg.content === "!kittn") {
 				msg.channel.send("Benjicanine: @Razorkittn I don't think you know the definition of yiff");
@@ -310,6 +323,7 @@ bot.on("ready", () => {
 				} else {
 					playing = true;
 					vinval(msg);
+					latestMessage = msg;
 					if(wildride()) {
 						soundplayer(seindfeldRape, channel);
 					} else {
@@ -368,7 +382,7 @@ bot.on("ready", () => {
 					vinval(msg);
 					soundplayer(succ, channel);
 				}
-			} 
+			}
 			else if (msg.content === "!nice") {
 				if(playing) {
 					msg.reply("This is not noice");
@@ -377,7 +391,7 @@ bot.on("ready", () => {
 					vinval(msg);
 					soundplayer(nice, channel);
 				}
-			} 
+			}
 			else if (msg.content === "!mandarin") {
 				if(playing) {
 					msg.reply("\*slurping sounds\*");
@@ -386,11 +400,11 @@ bot.on("ready", () => {
 					vinval(msg);
 					soundplayer(mandarin, channel);
 				}
-			} 
+			}
 			else if (msg.content === "!crump") {
 				if(playing) {
 					msg.reply("Don't worry dear, I will crump with you soon");
-				} else 
+				} else
 				{
 					playing = true;
 					vinval(msg);
@@ -400,7 +414,7 @@ bot.on("ready", () => {
 			else if (msg.content === "!juwul") {
 				if(playing) {
 					msg.reply("You hit jackpot, banhammer will hit.");
-				} else 
+				} else
 				{
 					playing = true;
 					vinval(msg);
@@ -414,7 +428,7 @@ bot.on("ready", () => {
 					playing = true;
 					vinval(msg);
 					soundplayer(songs(), channel);
-				
+
 				}
 			}
 			else if (msg.content === "!coom") {
@@ -429,10 +443,6 @@ bot.on("ready", () => {
 					vinval(msg);
 					soundplayer(uwu, channel);
 				}
-			} else if(msg.content === "!karlsson") {
-				mars = bot.guilds.get("238365174132768768").fetchMember(karlsson).then(member => {
-					//member.voiceChannel.
-				})
 			}
 			else if (msg.content === "!flås") {
 				mars = bot.guilds.get("238365174132768768").fetchMember(bomler).then(member => {
@@ -451,7 +461,7 @@ bot.on("ready", () => {
 								console.log("Kunde inte avflåsa Bomler")
 								avflås = false;
 							})
-	
+
 						} , 7000);
 					}
 
@@ -460,7 +470,7 @@ bot.on("ready", () => {
 					console.log("Kunde inte hitta bomler")
 					avflås = false;
 				})
-			
+
 			}
 			else if(msg.content.toLowerCase() === "!shitdrill") {
 				if(playing) {
@@ -497,15 +507,28 @@ bot.on("ready", () => {
 				}
 			}
 			else if (msg.content.toLowerCase() === "!karlsson") {
-				msg.reply("\" Någon annan sprutar på mig just nu ;)\"" - Niklas Granberg");
-				msg.reply("\"Älskar sperma på mig!!!! cummies\"" - Niklas Granberg");
+				msg.reply("\" Någon annan sprutar på mig just nu \;\)\" - Niklas Granberg");
+				msg.reply("\"Älskar sperma på mig!!!! cummies\" - Niklas Granberg");
 				if(!playing) {
 					playing = true
 					soundplayer(karlsson_video, channel);
 				}
 			}
-			else if (msg.content === "!8===D") { // TODO: add dynamic dick length
-				msg.reply("8===D-------"); //TODO: add dynamic cum
+			else if (msg.content[1] === "8" && msg.content[msg.content.length-1] === "D") { // TODO: add dynamic dick length
+				//msg.reply("8===D-------"); //TODO: add dynamic cum
+				kuk = true
+				i = 0;
+				for(i = 2; i<msg.content.length-1; i++) {
+					if(msg.content[i] !== "=") {
+						msg.reply("Det där var ingen kuk!")
+						kuk = false
+						break
+					}
+				}
+				if(kuk) {
+					//msg.reply("I:" + i + "   Pow: " + Math.pow(i, 2))
+					msg.reply("8" + "=".repeat(i-2) + "D" + "-".repeat(Math.pow(i-2, 2)))
+				}
 			}
 			else if (cmd[0] === "!play") {
 				if(playing) {
@@ -517,7 +540,7 @@ bot.on("ready", () => {
 						}
 
 					}
-					 
+
 				} else {
 					if(cmd.length > 1){
 						if(ytdl.validateURL(cmd[1])) {
@@ -532,7 +555,7 @@ bot.on("ready", () => {
 
 			}
 		}
-		
+
 	})
 	//For playing certain things when certain people join
 	bot.on('voiceStateUpdate', (oldMember, newMember) => {
@@ -555,7 +578,11 @@ bot.on("ready", () => {
 		} else if (user.id === bomler) {
 			checkWhenJoin(oldMember, newMember, bomlerLjud);
 		} else if (user.id === carrahager) {
-			//checkWhenJoin(oldMember, newMember, inga);
+			checkWhenJoin(oldMember, newMember, carrahagerLjud);
+		} else if (user.id === kitten) {
+			checkWhenJoin(oldMember, newMember, kittenLjud);
+		} else if (user.id === simpan) {
+			checkWhenJoin(oldMember, newMember, simpanLjud);
 		}
 	});
 });
@@ -573,7 +600,7 @@ function vinval(msg) {
 	} else {
 		msg.reply(meddelande[0] + vin + meddelande[1] + msg.content);
 	}
-	
+
 }
 
 function banhammer(msg) {
@@ -596,11 +623,11 @@ function checkWhenJoin(oldMember, newMember, video) {
 				} else {
 					soundplayer(video, newMember.voiceChannel);
 				}
-				
+
 			}
 		} else {
 			//User was not in a channel before on this server.
-			//or has been on this server earlier without disconnecting in between. 
+			//or has been on this server earlier without disconnecting in between.
 			if(oldMember.voiceChannelID === null) {
 				if(!playing) {
 					playing = true;
@@ -776,7 +803,7 @@ function mp3Player(video, channel, option) {
 			} catch (error) {
 				console.log("Could not disconnect from channel, probably disconnected already");
 			}
-			
+
 			console.log(e);
 		});
 
@@ -839,7 +866,7 @@ function soundplayer(video, channel, option) {
 			} catch (error) {
 				console.log("Could not disconnect from channel, probably disconnected already");
 			}
-			
+
 			console.log(e);
 		});
 
