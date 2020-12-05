@@ -535,6 +535,9 @@ bot.on("ready", () => {
 					} else if ((message.author.id === tim) && (i-2 < 2)){
 						msg.reply("ERROR : [exception raised dickOutOfBoundsException]\nAnvändare underskrider sin egen medfödda storlek. Välj en större längd och testa igen.");
 					} else {
+						if (message.author.id === emma) {
+							msg.reply("Inte visste jag... :O");
+						}
 						msg.reply("8" + "=".repeat(i-2) + "D" + "-".repeat(Math.pow(i-2, 2)));
 					}
 				}
