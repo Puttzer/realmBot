@@ -60,6 +60,7 @@ const MP = "260786692493934593";
 const carrahager = "109009038368350208";
 const kitten = "320120716760449025";
 const simpan = "238257602499313664";
+const viktor = "153459058823790592";
 
 const barkerId = "635925591769612323";
 const barkerVoice = "423191655135313930";
@@ -527,7 +528,15 @@ bot.on("ready", () => {
 				}
 				if(kuk) {
 					//msg.reply("I:" + i + "   Pow: " + Math.pow(i, 2))
-					msg.reply("8" + "=".repeat(i-2) + "D" + "-".repeat(Math.pow(i-2, 2)))
+					if (message.author.id === niklas || message.author.id === viktor) {
+						msg.reply("8" + "=".repeat(i-2) + "D" + "-".repeat(Math.pow(i-2, 3)));
+					} else if ((message.author.id === bomler || message.author.id === karlsson) && (i-2 > 2)){
+						msg.reply("ERROR : [exception raised dickOutOfBoundsException]\nAnvändare överskrider sin egen medfödda storlek. Välj en kortare längd och testa igen.");
+					} else if ((message.author.id === tim) && (i-2 < 2)){
+						msg.reply("ERROR : [exception raised dickOutOfBoundsException]\nAnvändare underskrider sin egen medfödda storlek. Välj en större längd och testa igen.");
+					} else {
+						msg.reply("8" + "=".repeat(i-2) + "D" + "-".repeat(Math.pow(i-2, 2)));
+					}
 				}
 			}
 			else if (cmd[0] === "!play") {
